@@ -3,4 +3,4 @@
 test/
 ivy.xml
 ivy.xml.MD5
-
+*.properties
