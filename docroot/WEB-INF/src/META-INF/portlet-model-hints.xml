@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.course.model.Course">
+		<field name="courseId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="lecturer" type="String" />
+		<field name="duration" type="int" />
+		<field name="status" type="boolean" />
+	</model>
+</model-hints>
