@@ -5,5 +5,6 @@
 	<category name="category.sample">
 		<portlet id="Course" />
 		<portlet id="course-list"></portlet>
+		<portlet id="course-registration"></portlet>
 	</category>
 </display>
