@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.liferay.course">
+	<author>ces</author>
+	<namespace>course</namespace>
+
+	<entity name="Course" local-service="true" remote-service="true" table="Course">
+
+		<!-- PK fields -->
+		<column name="courseId" type="long" primary="true" db-name="CourseId"/>
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" db-name="Name"/>
+		<column name="description" type="String" db-name="Description"/>
+		<column name="lecturer" type="String" db-name="Lecturer"/>
+		<column name="duration" type="int" db-name="Duration"/>
+		<column name="status" type="boolean" db-name="Status"/>
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="courseId" />
+		</order>
+
+		<!-- Finder methods -->
+	</entity>
+</service-builder>
