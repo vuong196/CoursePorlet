@@ -4,7 +4,7 @@
 	<author>ces</author>
 	<namespace>course</namespace>
 
-	<entity name="Course" local-service="true" remote-service="true" table="Course">
+	<entity name="Course" local-service="true" remote-service="true" table="Course" uuid="true">
 
 		<!-- PK fields -->
 		<column name="courseId" type="long" primary="true" db-name="CourseId"/>
@@ -23,5 +23,12 @@
 		</order>
 
 		<!-- Finder methods -->
+		
+		 <finder name="courseId" return-type="Collection">
+		 <finder-column name="courseId" />
+		 </finder>
+		 <!-- References -->
+		 <reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		 <reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
 </service-builder>
