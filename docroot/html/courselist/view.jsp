@@ -2,4 +2,42 @@
 
 <portlet:defineObjects />
 
-This is the <b>Course List</b> portlet in View mode.
+<%@ include file="/html/courselist/init.jsp"%>
+<%
+	List<Course> courses = CourseServiceUtil.getAllCourses();
+%>
+<%
+	PortletURL viewCourseUrl = renderResponse.createRenderURL();
+	viewCourseUrl.setParameter("mvcPath", "/courselist/view.jsp");
+%>
+
+	<h1> Course List </h1>
+
+<portlet:renderURL var="addCourse">
+	<portlet:param name="mvcPath" value="/html/courselist/add.jsp" />
+</portlet:renderURL>
+<aui:button name="" value="Add New Course" onClick="<%=addCourse %>" ></aui:button>
+<liferay-ui:search-container emptyResultsMessage="No course found" iteratorURL="<%=viewCourseUrl %>" >
+	<liferay-ui:search-container-results results="<%= CourseServiceUtil.getAllCourses() %>" >
+	</liferay-ui:search-container-results>
+	
+	<liferay-ui:search-container-row className="com.liferay.course.model.Course" modelVar="course" keyProperty="courseId" > 
+		<portlet:renderURL var="editCourse">
+			<portlet:param name="jspPage" value="/html/courselist/edit.jsp" />
+			<portlet:param name="courseId" value="${course.courseId }"/>
+		</portlet:renderURL>
+		<portlet:actionURL var="deleteCourseURL" name="deleteCourse">
+			<portlet:param name="courseId" value="${course.courseId }"/>
+		</portlet:actionURL>
+		<liferay-ui:search-container-column-text property="name" name="Course Name"/>
+		<liferay-ui:search-container-column-text property="description" name="Description"/>
+		<liferay-ui:search-container-column-text property="lecturer" name="Lecturer"/>
+		<liferay-ui:search-container-column-text property="duration" name="Duration"/>
+		<liferay-ui:search-container-column-text property="status" name="Status"/>
+		<liferay-ui:search-container-column-text name="Actions">
+			<aui:button name="" value="Update" onClick="${editCourse}" ></aui:button>
+			<aui:button name="" value="Delete" onClick="${deleteCourseURL}" ></aui:button>
+		</liferay-ui:search-container-column-text> 
+	</liferay-ui:search-container-row>
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
