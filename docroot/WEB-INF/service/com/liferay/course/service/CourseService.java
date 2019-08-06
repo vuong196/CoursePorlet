@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
@@ -63,4 +64,25 @@ public interface CourseService extends BaseService, InvokableService {
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public void addCourse(java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, boolean status)
+		throws java.lang.Exception;
+
+	public void deleteCourse(long id) throws java.lang.Exception;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.course.model.Course> getAllCourses()
+		throws java.lang.Exception;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.course.model.Course getCourseById(long id)
+		throws java.lang.Exception;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCoursesCount() throws java.lang.Exception;
+
+	public void updateCourse(long id, java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws java.lang.Exception;
 }

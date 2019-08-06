@@ -56,6 +56,43 @@ public class CourseServiceWrapper implements CourseService,
 		return _courseService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public void addCourse(java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, boolean status)
+		throws java.lang.Exception {
+		_courseService.addCourse(name, description, lecturer, duration, status);
+	}
+
+	@Override
+	public void deleteCourse(long id) throws java.lang.Exception {
+		_courseService.deleteCourse(id);
+	}
+
+	@Override
+	public java.util.List<com.liferay.course.model.Course> getAllCourses()
+		throws java.lang.Exception {
+		return _courseService.getAllCourses();
+	}
+
+	@Override
+	public com.liferay.course.model.Course getCourseById(long id)
+		throws java.lang.Exception {
+		return _courseService.getCourseById(id);
+	}
+
+	@Override
+	public int getCoursesCount() throws java.lang.Exception {
+		return _courseService.getCoursesCount();
+	}
+
+	@Override
+	public void updateCourse(long id, java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws java.lang.Exception {
+		_courseService.updateCourse(id, name, description, lecturer, duration,
+			status);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

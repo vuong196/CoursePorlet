@@ -63,6 +63,37 @@ public class CourseServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static void addCourse(java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws java.lang.Exception {
+		getService().addCourse(name, description, lecturer, duration, status);
+	}
+
+	public static void deleteCourse(long id) throws java.lang.Exception {
+		getService().deleteCourse(id);
+	}
+
+	public static java.util.List<com.liferay.course.model.Course> getAllCourses()
+		throws java.lang.Exception {
+		return getService().getAllCourses();
+	}
+
+	public static com.liferay.course.model.Course getCourseById(long id)
+		throws java.lang.Exception {
+		return getService().getCourseById(id);
+	}
+
+	public static int getCoursesCount() throws java.lang.Exception {
+		return getService().getCoursesCount();
+	}
+
+	public static void updateCourse(long id, java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws java.lang.Exception {
+		getService()
+			.updateCourse(id, name, description, lecturer, duration, status);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

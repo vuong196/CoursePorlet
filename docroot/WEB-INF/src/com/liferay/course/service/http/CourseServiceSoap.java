@@ -14,6 +14,13 @@
 
 package com.liferay.course.service.http;
 
+import com.liferay.course.service.CourseServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.liferay.course.service.CourseServiceUtil} service utility. The
@@ -55,4 +62,85 @@ package com.liferay.course.service.http;
  * @generated
  */
 public class CourseServiceSoap {
+	public static void addCourse(java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws RemoteException {
+		try {
+			CourseServiceUtil.addCourse(name, description, lecturer, duration,
+				status);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCourse(long id) throws RemoteException {
+		try {
+			CourseServiceUtil.deleteCourse(id);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.course.model.CourseSoap[] getAllCourses()
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.course.model.Course> returnValue = CourseServiceUtil.getAllCourses();
+
+			return com.liferay.course.model.CourseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.course.model.CourseSoap getCourseById(long id)
+		throws RemoteException {
+		try {
+			com.liferay.course.model.Course returnValue = CourseServiceUtil.getCourseById(id);
+
+			return com.liferay.course.model.CourseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCoursesCount() throws RemoteException {
+		try {
+			int returnValue = CourseServiceUtil.getCoursesCount();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updateCourse(long id, java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		boolean status) throws RemoteException {
+		try {
+			CourseServiceUtil.updateCourse(id, name, description, lecturer,
+				duration, status);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CourseServiceSoap.class);
 }

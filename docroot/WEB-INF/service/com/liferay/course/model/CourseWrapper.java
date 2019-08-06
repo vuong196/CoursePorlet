@@ -311,7 +311,7 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	}
 
 	@Override
-	public int compareTo(Course course) {
+	public int compareTo(com.liferay.course.model.Course course) {
 		return _course.compareTo(course);
 	}
 
@@ -321,17 +321,17 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Course> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.liferay.course.model.Course> toCacheModel() {
 		return _course.toCacheModel();
 	}
 
 	@Override
-	public Course toEscapedModel() {
+	public com.liferay.course.model.Course toEscapedModel() {
 		return new CourseWrapper(_course.toEscapedModel());
 	}
 
 	@Override
-	public Course toUnescapedModel() {
+	public com.liferay.course.model.Course toUnescapedModel() {
 		return new CourseWrapper(_course.toUnescapedModel());
 	}
 
