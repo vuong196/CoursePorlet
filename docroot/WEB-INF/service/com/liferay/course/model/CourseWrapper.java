@@ -48,6 +48,7 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("courseId", getCourseId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
@@ -60,6 +61,12 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long courseId = (Long)attributes.get("courseId");
 
 		if (courseId != null) {
@@ -115,6 +122,26 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_course.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the uuid of this course.
+	*
+	* @return the uuid of this course
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _course.getUuid();
+	}
+
+	/**
+	* Sets the uuid of this course.
+	*
+	* @param uuid the uuid of this course
+	*/
+	@Override
+	public void setUuid(java.lang.String uuid) {
+		_course.setUuid(uuid);
 	}
 
 	/**

@@ -24,40 +24,40 @@ import java.util.Arrays;
  */
 public class CourseServiceClpInvoker {
 	public CourseServiceClpInvoker() {
-		_methodName18 = "getBeanIdentifier";
+		_methodName30 = "getBeanIdentifier";
 
-		_methodParameterTypes18 = new String[] {  };
+		_methodParameterTypes30 = new String[] {  };
 
-		_methodName19 = "setBeanIdentifier";
+		_methodName31 = "setBeanIdentifier";
 
-		_methodParameterTypes19 = new String[] { "java.lang.String" };
+		_methodParameterTypes31 = new String[] { "java.lang.String" };
 
-		_methodName24 = "addCourse";
+		_methodName36 = "addCourse";
 
-		_methodParameterTypes24 = new String[] {
+		_methodParameterTypes36 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"int", "boolean"
 			};
 
-		_methodName25 = "deleteCourse";
+		_methodName37 = "deleteCourse";
 
-		_methodParameterTypes25 = new String[] { "long" };
+		_methodParameterTypes37 = new String[] { "long" };
 
-		_methodName26 = "getAllCourses";
+		_methodName38 = "getAllCourses";
 
-		_methodParameterTypes26 = new String[] {  };
+		_methodParameterTypes38 = new String[] {  };
 
-		_methodName27 = "getCourseById";
+		_methodName39 = "getCourseById";
 
-		_methodParameterTypes27 = new String[] { "long" };
+		_methodParameterTypes39 = new String[] { "long" };
 
-		_methodName28 = "getCoursesCount";
+		_methodName40 = "getCoursesCount";
 
-		_methodParameterTypes28 = new String[] {  };
+		_methodParameterTypes40 = new String[] {  };
 
-		_methodName29 = "updateCourse";
+		_methodName41 = "updateCourse";
 
-		_methodParameterTypes29 = new String[] {
+		_methodParameterTypes41 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "boolean"
 			};
@@ -65,20 +65,20 @@ public class CourseServiceClpInvoker {
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName18.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
+		if (_methodName30.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
 			return CourseServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName19.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
 			CourseServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName24.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
+		if (_methodName36.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
 			CourseServiceUtil.addCourse((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue(),
@@ -87,30 +87,30 @@ public class CourseServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName25.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
 			CourseServiceUtil.deleteCourse(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
-		if (_methodName26.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+		if (_methodName38.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
 			return CourseServiceUtil.getAllCourses();
 		}
 
-		if (_methodName27.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+		if (_methodName39.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
 			return CourseServiceUtil.getCourseById(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName28.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+		if (_methodName40.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
 			return CourseServiceUtil.getCoursesCount();
 		}
 
-		if (_methodName29.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
 			CourseServiceUtil.updateCourse(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -123,20 +123,20 @@ public class CourseServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName18;
-	private String[] _methodParameterTypes18;
-	private String _methodName19;
-	private String[] _methodParameterTypes19;
-	private String _methodName24;
-	private String[] _methodParameterTypes24;
-	private String _methodName25;
-	private String[] _methodParameterTypes25;
-	private String _methodName26;
-	private String[] _methodParameterTypes26;
-	private String _methodName27;
-	private String[] _methodParameterTypes27;
-	private String _methodName28;
-	private String[] _methodParameterTypes28;
-	private String _methodName29;
-	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName36;
+	private String[] _methodParameterTypes36;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
+	private String _methodName38;
+	private String[] _methodParameterTypes38;
+	private String _methodName39;
+	private String[] _methodParameterTypes39;
+	private String _methodName40;
+	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
 }

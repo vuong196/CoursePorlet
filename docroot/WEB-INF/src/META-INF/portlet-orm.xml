@@ -12,6 +12,9 @@
 			<id name="courseId">
 				<column name="COURSEID" />
 			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
 			<basic name="name">
 				<column name="NAME" />
 			</basic>

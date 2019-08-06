@@ -30,6 +30,7 @@ public class CourseSoap implements Serializable {
 	public static CourseSoap toSoapModel(Course model) {
 		CourseSoap soapModel = new CourseSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setCourseId(model.getCourseId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
@@ -88,6 +89,14 @@ public class CourseSoap implements Serializable {
 		setCourseId(pk);
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public long getCourseId() {
 		return _courseId;
 	}
@@ -140,6 +149,7 @@ public class CourseSoap implements Serializable {
 		_status = status;
 	}
 
+	private String _uuid;
 	private long _courseId;
 	private String _name;
 	private String _description;

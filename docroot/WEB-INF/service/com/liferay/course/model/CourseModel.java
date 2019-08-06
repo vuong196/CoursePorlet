@@ -58,6 +58,21 @@ public interface CourseModel extends BaseModel<Course> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this course.
+	 *
+	 * @return the uuid of this course
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this course.
+	 *
+	 * @param uuid the uuid of this course
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the course ID of this course.
 	 *
 	 * @return the course ID of this course

@@ -72,6 +72,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("courseId", getCourseId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
@@ -84,6 +85,12 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long courseId = (Long)attributes.get("courseId");
 
 		if (courseId != null) {
@@ -118,6 +125,29 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 		if (status != null) {
 			setStatus(status);
+		}
+	}
+
+	@Override
+	public String getUuid() {
+		return _uuid;
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+
+		if (_courseRemoteModel != null) {
+			try {
+				Class<?> clazz = _courseRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUuid", String.class);
+
+				method.invoke(_courseRemoteModel, uuid);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
 		}
 	}
 
@@ -333,6 +363,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	public Object clone() {
 		CourseClp clone = new CourseClp();
 
+		clone.setUuid(getUuid());
 		clone.setCourseId(getCourseId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
@@ -395,9 +426,11 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
-		sb.append("{courseId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", courseId=");
 		sb.append(getCourseId());
 		sb.append(", name=");
 		sb.append(getName());
@@ -416,12 +449,16 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.course.model.Course");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>courseId</column-name><column-value><![CDATA[");
 		sb.append(getCourseId());
@@ -452,6 +489,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		return sb.toString();
 	}
 
+	private String _uuid;
 	private long _courseId;
 	private String _name;
 	private String _description;

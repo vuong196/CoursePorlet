@@ -63,6 +63,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	 */
 	public static final String TABLE_NAME = "Course";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "CourseId", Types.BIGINT },
 			{ "Name", Types.VARCHAR },
 			{ "Description", Types.VARCHAR },
@@ -70,7 +71,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 			{ "Duration", Types.INTEGER },
 			{ "Status", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Course (CourseId LONG not null primary key,Name VARCHAR(75) null,Description VARCHAR(75) null,Lecturer VARCHAR(75) null,Duration INTEGER,Status BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Course (uuid_ VARCHAR(75) null,CourseId LONG not null primary key,Name VARCHAR(75) null,Description VARCHAR(75) null,Lecturer VARCHAR(75) null,Duration INTEGER,Status BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Course";
 	public static final String ORDER_BY_JPQL = " ORDER BY course.courseId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY Course.CourseId DESC";
@@ -83,7 +84,11 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.course.model.Course"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.course.model.Course"),
+			true);
+	public static long COURSEID_COLUMN_BITMASK = 1L;
+	public static long UUID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -98,6 +103,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		Course model = new CourseImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setCourseId(soapModel.getCourseId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
@@ -168,6 +174,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("courseId", getCourseId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
@@ -180,6 +187,12 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long courseId = (Long)attributes.get("courseId");
 
 		if (courseId != null) {
@@ -219,13 +232,49 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@JSON
 	@Override
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
+	}
+
+	@JSON
+	@Override
 	public long getCourseId() {
 		return _courseId;
 	}
 
 	@Override
 	public void setCourseId(long courseId) {
+		_columnBitmask = -1L;
+
+		if (!_setOriginalCourseId) {
+			_setOriginalCourseId = true;
+
+			_originalCourseId = _courseId;
+		}
+
 		_courseId = courseId;
+	}
+
+	public long getOriginalCourseId() {
+		return _originalCourseId;
 	}
 
 	@JSON
@@ -303,6 +352,10 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		_status = status;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -330,6 +383,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public Object clone() {
 		CourseImpl courseImpl = new CourseImpl();
 
+		courseImpl.setUuid(getUuid());
 		courseImpl.setCourseId(getCourseId());
 		courseImpl.setName(getName());
 		courseImpl.setDescription(getDescription());
@@ -394,11 +448,28 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public void resetOriginalValues() {
+		CourseModelImpl courseModelImpl = this;
+
+		courseModelImpl._originalUuid = courseModelImpl._uuid;
+
+		courseModelImpl._originalCourseId = courseModelImpl._courseId;
+
+		courseModelImpl._setOriginalCourseId = false;
+
+		courseModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<Course> toCacheModel() {
 		CourseCacheModel courseCacheModel = new CourseCacheModel();
+
+		courseCacheModel.uuid = getUuid();
+
+		String uuid = courseCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			courseCacheModel.uuid = null;
+		}
 
 		courseCacheModel.courseId = getCourseId();
 
@@ -435,9 +506,11 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
-		sb.append("{courseId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", courseId=");
 		sb.append(getCourseId());
 		sb.append(", name=");
 		sb.append(getName());
@@ -456,12 +529,16 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.course.model.Course");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>courseId</column-name><column-value><![CDATA[");
 		sb.append(getCourseId());
@@ -494,11 +571,16 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	private static ClassLoader _classLoader = Course.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Course.class };
+	private String _uuid;
+	private String _originalUuid;
 	private long _courseId;
+	private long _originalCourseId;
+	private boolean _setOriginalCourseId;
 	private String _name;
 	private String _description;
 	private String _lecturer;
 	private int _duration;
 	private boolean _status;
+	private long _columnBitmask;
 	private Course _escapedModel;
 }

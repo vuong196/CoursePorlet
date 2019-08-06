@@ -26,6 +26,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
+
 import javax.sql.DataSource;
 
 /**
@@ -198,6 +201,119 @@ public abstract class CourseServiceBaseImpl extends BaseServiceImpl
 		this.userPersistence = userPersistence;
 	}
 
+	/**
+	 * Returns the asset entry local service.
+	 *
+	 * @return the asset entry local service
+	 */
+	public com.liferay.portlet.asset.service.AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
+	}
+
+	/**
+	 * Sets the asset entry local service.
+	 *
+	 * @param assetEntryLocalService the asset entry local service
+	 */
+	public void setAssetEntryLocalService(
+		com.liferay.portlet.asset.service.AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
+	}
+
+	/**
+	 * Returns the asset entry remote service.
+	 *
+	 * @return the asset entry remote service
+	 */
+	public com.liferay.portlet.asset.service.AssetEntryService getAssetEntryService() {
+		return assetEntryService;
+	}
+
+	/**
+	 * Sets the asset entry remote service.
+	 *
+	 * @param assetEntryService the asset entry remote service
+	 */
+	public void setAssetEntryService(
+		com.liferay.portlet.asset.service.AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
+	}
+
+	/**
+	 * Returns the asset entry persistence.
+	 *
+	 * @return the asset entry persistence
+	 */
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
+	}
+
+	/**
+	 * Sets the asset entry persistence.
+	 *
+	 * @param assetEntryPersistence the asset entry persistence
+	 */
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
+	}
+
+	/**
+	 * Returns the asset tag local service.
+	 *
+	 * @return the asset tag local service
+	 */
+	public com.liferay.portlet.asset.service.AssetTagLocalService getAssetTagLocalService() {
+		return assetTagLocalService;
+	}
+
+	/**
+	 * Sets the asset tag local service.
+	 *
+	 * @param assetTagLocalService the asset tag local service
+	 */
+	public void setAssetTagLocalService(
+		com.liferay.portlet.asset.service.AssetTagLocalService assetTagLocalService) {
+		this.assetTagLocalService = assetTagLocalService;
+	}
+
+	/**
+	 * Returns the asset tag remote service.
+	 *
+	 * @return the asset tag remote service
+	 */
+	public com.liferay.portlet.asset.service.AssetTagService getAssetTagService() {
+		return assetTagService;
+	}
+
+	/**
+	 * Sets the asset tag remote service.
+	 *
+	 * @param assetTagService the asset tag remote service
+	 */
+	public void setAssetTagService(
+		com.liferay.portlet.asset.service.AssetTagService assetTagService) {
+		this.assetTagService = assetTagService;
+	}
+
+	/**
+	 * Returns the asset tag persistence.
+	 *
+	 * @return the asset tag persistence
+	 */
+	public AssetTagPersistence getAssetTagPersistence() {
+		return assetTagPersistence;
+	}
+
+	/**
+	 * Sets the asset tag persistence.
+	 *
+	 * @param assetTagPersistence the asset tag persistence
+	 */
+	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
+		this.assetTagPersistence = assetTagPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		Class<?> clazz = getClass();
 
@@ -291,6 +407,18 @@ public abstract class CourseServiceBaseImpl extends BaseServiceImpl
 	protected com.liferay.portal.service.UserService userService;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = com.liferay.portlet.asset.service.AssetEntryLocalService.class)
+	protected com.liferay.portlet.asset.service.AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(type = com.liferay.portlet.asset.service.AssetEntryService.class)
+	protected com.liferay.portlet.asset.service.AssetEntryService assetEntryService;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = com.liferay.portlet.asset.service.AssetTagLocalService.class)
+	protected com.liferay.portlet.asset.service.AssetTagLocalService assetTagLocalService;
+	@BeanReference(type = com.liferay.portlet.asset.service.AssetTagService.class)
+	protected com.liferay.portlet.asset.service.AssetTagService assetTagService;
+	@BeanReference(type = AssetTagPersistence.class)
+	protected AssetTagPersistence assetTagPersistence;
 	private String _beanIdentifier;
 	private ClassLoader _classLoader;
 	private CourseServiceClpInvoker _clpInvoker = new CourseServiceClpInvoker();
