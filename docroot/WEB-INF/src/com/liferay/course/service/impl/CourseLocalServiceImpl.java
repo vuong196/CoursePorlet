@@ -14,16 +14,25 @@
 
 package com.liferay.course.service.impl;
 
+import java.util.List;
+
+import com.liferay.course.model.Course;
 import com.liferay.course.service.base.CourseLocalServiceBaseImpl;
+import com.liferay.course.service.persistence.CourseUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the course local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.course.service.CourseLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link com.liferay.course.service.CourseLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author ces
@@ -31,9 +40,18 @@ import com.liferay.course.service.base.CourseLocalServiceBaseImpl;
  * @see com.liferay.course.service.CourseLocalServiceUtil
  */
 public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.course.service.CourseLocalServiceUtil} to access the course local service.
+	 * 
+	 * Never reference this interface directly. Always use {@link
+	 * com.liferay.course.service.CourseLocalServiceUtil} to access the course
+	 * local service.
 	 */
+
+	@Override
+	public List<Course> getCoursesByStatus(int status) throws SystemException {
+
+		return CourseUtil.findBystatus(status);
+	}
 }
