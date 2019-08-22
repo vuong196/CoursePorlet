@@ -49,6 +49,11 @@ public class CourseListPortlet extends MVCPortlet {
 		return CourseServiceUtil.getAllCourses();
 	}
 
+	public List<Course> getAvailableCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
+
+		return CourseServiceUtil.getCoursesByStatus(1);
+	}
+
 	public Course getCourseById(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
 		long id = ParamUtil.getLong(actionRequest, "courseId");
