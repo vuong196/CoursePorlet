@@ -2,10 +2,8 @@
 
 <portlet:actionURL var="addCourseURL" name="addCourse">
 </portlet:actionURL>
-<center>
-	<h1> Add New Course </h1>
-</center>
 
+<h1> Add New Course </h1>
 <aui:form action="<%=addCourseURL%>" method="post">
 	<aui:input label="Name" name="name" type="text" value="">
 		<aui:validator name="required" />
@@ -22,9 +20,7 @@
 		<aui:validator name="required" />
 		<aui:validator name="range">[1,40]</aui:validator>
 	</aui:input>
-	<aui:input label="Available" name="status" type="checkbox" value="" >
-		<aui:validator name="required" />
+	<aui:input label="Available" name="status" type="checkbox" value="true">
 	</aui:input>
-
 	<aui:button type="submit" />
 </aui:form>
