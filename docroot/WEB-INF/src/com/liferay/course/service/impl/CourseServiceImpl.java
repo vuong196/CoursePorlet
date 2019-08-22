@@ -17,9 +17,16 @@ package com.liferay.course.service.impl;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.course.EntryDescriptionException;
+import com.liferay.course.EntryDurationException;
+import com.liferay.course.EntryLecturerException;
+import com.liferay.course.EntryNameException;
 import com.liferay.course.model.Course;
 import com.liferay.course.service.CourseLocalServiceUtil;
 import com.liferay.course.service.base.CourseServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the course remote service.
@@ -49,51 +56,109 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	 * service.
 	 */
 
-	public void addCourse(String name, String description, String lecturer, int duration, boolean status)
-			throws Exception {
+	@Override
+	public Course addCourse(long groupId, String name, String description, String lecturer, int duration, int status)
+		throws Exception {
 
-		Course course = CourseLocalServiceUtil.createCourse(CounterLocalServiceUtil.increment());
+		validator(name, description, lecturer, duration, status);
+		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "ADD_COURSE")) {
 
-		course.setName(name);
-		course.setDescription(description);
-		course.setLecturer(lecturer);
-		course.setDuration(duration);
-		course.setStatus(status);
+			Course course = CourseLocalServiceUtil.createCourse(CounterLocalServiceUtil.increment());
+			course.setName(name);
+			course.setDescription(description);
+			course.setLecturer(lecturer);
+			course.setDuration(duration);
+			course.setStatus(status);
+			return CourseLocalServiceUtil.addCourse(course);
+		}
+		else {
 
-		CourseLocalServiceUtil.addCourse(course);
+			return null;
+		}
+
 	}
 
-	public void deleteCourse(long id) throws Exception {
+	@Override
+	public Course deleteCourse(long groupId, long id) throws Exception {
 
-		CourseLocalServiceUtil.deleteCourse(id);
+		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "DELETE_COURSE")) {
+
+			return CourseLocalServiceUtil.deleteCourse(id);
+		}
+		else {
+
+			return null;
+		}
+
 	}
 
+	@Override
 	public List<Course> getAllCourses() throws Exception {
 
 		return CourseLocalServiceUtil.getCourses(-1, -1);
 	}
 
+	@Override
 	public Course getCourseById(long id) throws Exception {
 
 		return CourseLocalServiceUtil.getCourse(id);
 	}
 
+	@Override
+	public List<Course> getCoursesByStatus(int status) throws SystemException {
+
+		return CourseLocalServiceUtil.getCoursesByStatus(status);
+	}
+
+	@Override
 	public int getCoursesCount() throws Exception {
 
 		return CourseLocalServiceUtil.getCoursesCount();
 	}
 
-	public void updateCourse(long id, String name, String description, String lecturer, int duration, boolean status)
-			throws Exception {
+	@Override
+	public Course updateCourse(long groupId, long id, String name, String description, String lecturer, int duration,
+		int status) throws Exception {
 
-		Course course = CourseLocalServiceUtil.fetchCourse(id);
+		validator(name, description, lecturer, duration, status);
 
-		course.setName(name);
-		course.setDescription(description);
-		course.setLecturer(lecturer);
-		course.setDuration(duration);
-		course.setStatus(status);
+		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "UPDATE_COURSE")) {
 
-		CourseLocalServiceUtil.updateCourse(course);
+			Course course = CourseLocalServiceUtil.fetchCourse(id);
+			course.setName(name);
+			course.setDescription(description);
+			course.setLecturer(lecturer);
+			course.setDuration(duration);
+			course.setStatus(status);
+			return CourseLocalServiceUtil.updateCourse(course);
+		}
+		else {
+
+			return null;
+		}
+	}
+
+	protected void validator(String name, String description, String lecturer, int duration, int status)
+		throws PortalException {
+
+		if (Validator.isNull(name) || name.length() > 75) {
+			throw new EntryNameException("");
+		}
+
+		if (description.length() > 2000) {
+			throw new EntryDescriptionException();
+		}
+
+		if (Validator.isNull(lecturer) || lecturer.length() > 75) {
+			throw new EntryLecturerException();
+		}
+
+		if (duration < 1 || duration > 40) {
+			throw new EntryDurationException();
+		}
+
+		if (Validator.isNull(status)) {
+			throw new EntryDurationException();
+		}
 	}
 }
