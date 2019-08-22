@@ -280,6 +280,12 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 		return _courseLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return _courseLocalService.getCoursesByStatus(status);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

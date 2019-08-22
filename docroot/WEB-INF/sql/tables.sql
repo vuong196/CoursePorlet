@@ -5,5 +5,29 @@ create table Course (
 	Description VARCHAR(75) null,
 	Lecturer VARCHAR(75) null,
 	Duration INTEGER,
-	Status BOOLEAN
+	Status INTEGER
+);
+
+create table Course-Registration (
+	uuid_ VARCHAR(75) null,
+	id LONG not null primary key,
+	courseId LONG,
+	userId LONG,
+	status INTEGER
+);
+
+create table CourseRegistration (
+	uuid_ VARCHAR(75) null,
+	id LONG not null primary key,
+	courseId LONG,
+	userId LONG,
+	status INTEGER
+);
+
+create table course_user (
+	uuid_ VARCHAR(75) null,
+	id LONG not null primary key,
+	courseId LONG,
+	userId LONG,
+	status INTEGER
 );

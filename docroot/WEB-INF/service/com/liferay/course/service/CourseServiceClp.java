@@ -35,13 +35,13 @@ public class CourseServiceClp implements CourseService {
 		_methodName3 = "addCourse";
 
 		_methodParameterTypes3 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "boolean"
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int"
 			};
 
 		_methodName4 = "deleteCourse";
 
-		_methodParameterTypes4 = new String[] { "long" };
+		_methodParameterTypes4 = new String[] { "long", "long" };
 
 		_methodName5 = "getAllCourses";
 
@@ -51,15 +51,19 @@ public class CourseServiceClp implements CourseService {
 
 		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName7 = "getCoursesCount";
+		_methodName7 = "getCoursesByStatus";
 
-		_methodParameterTypes7 = new String[] {  };
+		_methodParameterTypes7 = new String[] { "int" };
 
-		_methodName8 = "updateCourse";
+		_methodName8 = "getCoursesCount";
 
-		_methodParameterTypes8 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "boolean"
+		_methodParameterTypes8 = new String[] {  };
+
+		_methodName9 = "updateCourse";
+
+		_methodParameterTypes9 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int"
 			};
 	}
 
@@ -114,23 +118,28 @@ public class CourseServiceClp implements CourseService {
 	}
 
 	@Override
-	public void addCourse(java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public com.liferay.course.model.Course addCourse(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
 		throws java.lang.Exception {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName3,
-				_methodParameterTypes3,
-				new Object[] {
+			returnObj = _invokableService.invokeMethod(_methodName3,
+					_methodParameterTypes3,
+					new Object[] {
+						groupId,
+						
 					ClpSerializer.translateInput(name),
-					
-				ClpSerializer.translateInput(description),
-					
-				ClpSerializer.translateInput(lecturer),
-					
-				duration,
-					
-				status
-				});
+						
+					ClpSerializer.translateInput(description),
+						
+					ClpSerializer.translateInput(lecturer),
+						
+					duration,
+						
+					status
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -147,13 +156,18 @@ public class CourseServiceClp implements CourseService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.liferay.course.model.Course)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public void deleteCourse(long id) throws java.lang.Exception {
+	public com.liferay.course.model.Course deleteCourse(long groupId, long id)
+		throws java.lang.Exception {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName4,
-				_methodParameterTypes4, new Object[] { id });
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4, new Object[] { groupId, id });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -170,6 +184,8 @@ public class CourseServiceClp implements CourseService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.liferay.course.model.Course)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -229,12 +245,40 @@ public class CourseServiceClp implements CourseService {
 	}
 
 	@Override
-	public int getCoursesCount() throws java.lang.Exception {
+	public java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] {  });
+					_methodParameterTypes7, new Object[] { status });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.course.model.Course>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getCoursesCount() throws java.lang.Exception {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -256,25 +300,30 @@ public class CourseServiceClp implements CourseService {
 	}
 
 	@Override
-	public void updateCourse(long id, java.lang.String name,
-		java.lang.String description, java.lang.String lecturer, int duration,
-		boolean status) throws java.lang.Exception {
+	public com.liferay.course.model.Course updateCourse(long groupId, long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws java.lang.Exception {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
-				new Object[] {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
+					new Object[] {
+						groupId,
+						
 					id,
-					
-				ClpSerializer.translateInput(name),
-					
-				ClpSerializer.translateInput(description),
-					
-				ClpSerializer.translateInput(lecturer),
-					
-				duration,
-					
-				status
-				});
+						
+					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(description),
+						
+					ClpSerializer.translateInput(lecturer),
+						
+					duration,
+						
+					status
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -291,6 +340,8 @@ public class CourseServiceClp implements CourseService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.liferay.course.model.Course)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableService _invokableService;
@@ -310,4 +361,6 @@ public class CourseServiceClp implements CourseService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

@@ -17,6 +17,7 @@ package com.liferay.course.service.base;
 import com.liferay.course.model.Course;
 import com.liferay.course.service.CourseLocalService;
 import com.liferay.course.service.persistence.CoursePersistence;
+import com.liferay.course.service.persistence.CourseRegistrationPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -333,6 +334,63 @@ public abstract class CourseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the course registration local service.
+	 *
+	 * @return the course registration local service
+	 */
+	public com.liferay.course.service.CourseRegistrationLocalService getCourseRegistrationLocalService() {
+		return courseRegistrationLocalService;
+	}
+
+	/**
+	 * Sets the course registration local service.
+	 *
+	 * @param courseRegistrationLocalService the course registration local service
+	 */
+	public void setCourseRegistrationLocalService(
+		com.liferay.course.service.CourseRegistrationLocalService courseRegistrationLocalService) {
+		this.courseRegistrationLocalService = courseRegistrationLocalService;
+	}
+
+	/**
+	 * Returns the course registration remote service.
+	 *
+	 * @return the course registration remote service
+	 */
+	public com.liferay.course.service.CourseRegistrationService getCourseRegistrationService() {
+		return courseRegistrationService;
+	}
+
+	/**
+	 * Sets the course registration remote service.
+	 *
+	 * @param courseRegistrationService the course registration remote service
+	 */
+	public void setCourseRegistrationService(
+		com.liferay.course.service.CourseRegistrationService courseRegistrationService) {
+		this.courseRegistrationService = courseRegistrationService;
+	}
+
+	/**
+	 * Returns the course registration persistence.
+	 *
+	 * @return the course registration persistence
+	 */
+	public CourseRegistrationPersistence getCourseRegistrationPersistence() {
+		return courseRegistrationPersistence;
+	}
+
+	/**
+	 * Sets the course registration persistence.
+	 *
+	 * @param courseRegistrationPersistence the course registration persistence
+	 */
+	public void setCourseRegistrationPersistence(
+		CourseRegistrationPersistence courseRegistrationPersistence) {
+		this.courseRegistrationPersistence = courseRegistrationPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -627,6 +685,12 @@ public abstract class CourseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.course.service.CourseService courseService;
 	@BeanReference(type = CoursePersistence.class)
 	protected CoursePersistence coursePersistence;
+	@BeanReference(type = com.liferay.course.service.CourseRegistrationLocalService.class)
+	protected com.liferay.course.service.CourseRegistrationLocalService courseRegistrationLocalService;
+	@BeanReference(type = com.liferay.course.service.CourseRegistrationService.class)
+	protected com.liferay.course.service.CourseRegistrationService courseRegistrationService;
+	@BeanReference(type = CourseRegistrationPersistence.class)
+	protected CourseRegistrationPersistence courseRegistrationPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

@@ -65,11 +65,13 @@ public interface CourseService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public void addCourse(java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public com.liferay.course.model.Course addCourse(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
 		throws java.lang.Exception;
 
-	public void deleteCourse(long id) throws java.lang.Exception;
+	public com.liferay.course.model.Course deleteCourse(long groupId, long id)
+		throws java.lang.Exception;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.course.model.Course> getAllCourses()
@@ -80,9 +82,14 @@ public interface CourseService extends BaseService, InvokableService {
 		throws java.lang.Exception;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCoursesCount() throws java.lang.Exception;
 
-	public void updateCourse(long id, java.lang.String name,
-		java.lang.String description, java.lang.String lecturer, int duration,
-		boolean status) throws java.lang.Exception;
+	public com.liferay.course.model.Course updateCourse(long groupId, long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws java.lang.Exception;
 }

@@ -97,7 +97,7 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 			setDuration(duration);
 		}
 
-		Boolean status = (Boolean)attributes.get("status");
+		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
 			setStatus(status);
@@ -250,27 +250,17 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	* @return the status of this course
 	*/
 	@Override
-	public boolean getStatus() {
+	public int getStatus() {
 		return _course.getStatus();
 	}
 
 	/**
-	* Returns <code>true</code> if this course is status.
-	*
-	* @return <code>true</code> if this course is status; <code>false</code> otherwise
-	*/
-	@Override
-	public boolean isStatus() {
-		return _course.isStatus();
-	}
-
-	/**
-	* Sets whether this course is status.
+	* Sets the status of this course.
 	*
 	* @param status the status of this course
 	*/
 	@Override
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		_course.setStatus(status);
 	}
 

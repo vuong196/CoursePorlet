@@ -15,6 +15,7 @@
 package com.liferay.course.service;
 
 import com.liferay.course.model.CourseClp;
+import com.liferay.course.model.CourseRegistrationClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputCourse(oldModel);
 		}
 
+		if (oldModelClassName.equals(CourseRegistrationClp.class.getName())) {
+			return translateInputCourseRegistration(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -131,6 +136,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputCourseRegistration(BaseModel<?> oldModel) {
+		CourseRegistrationClp oldClpModel = (CourseRegistrationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getCourseRegistrationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -150,6 +165,11 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals("com.liferay.course.model.impl.CourseImpl")) {
 			return translateOutputCourse(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"com.liferay.course.model.impl.CourseRegistrationImpl")) {
+			return translateOutputCourseRegistration(oldModel);
 		}
 
 		return oldModel;
@@ -232,8 +252,37 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
+		if (className.equals("com.liferay.course.CourseNameException")) {
+			return new com.liferay.course.CourseNameException();
+		}
+
+		if (className.equals("com.liferay.course.EntryDescriptionException")) {
+			return new com.liferay.course.EntryDescriptionException();
+		}
+
+		if (className.equals("com.liferay.course.EntryDurationException")) {
+			return new com.liferay.course.EntryDurationException();
+		}
+
+		if (className.equals("com.liferay.course.EntryLecturerException")) {
+			return new com.liferay.course.EntryLecturerException();
+		}
+
+		if (className.equals("com.liferay.course.EntryNameException")) {
+			return new com.liferay.course.EntryNameException();
+		}
+
+		if (className.equals("com.liferay.course.EntryStatusException")) {
+			return new com.liferay.course.EntryStatusException();
+		}
+
 		if (className.equals("com.liferay.course.NoSuchCourseException")) {
 			return new com.liferay.course.NoSuchCourseException();
+		}
+
+		if (className.equals(
+					"com.liferay.course.NoSuchCourseRegistrationException")) {
+			return new com.liferay.course.NoSuchCourseRegistrationException();
 		}
 
 		return throwable;
@@ -245,6 +294,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setCourseRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputCourseRegistration(
+		BaseModel<?> oldModel) {
+		CourseRegistrationClp newModel = new CourseRegistrationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setCourseRegistrationRemoteModel(oldModel);
 
 		return newModel;
 	}

@@ -100,13 +100,17 @@ public class CourseLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.liferay.course.model.Course" };
 
-		_methodName46 = "getBeanIdentifier";
+		_methodName52 = "getBeanIdentifier";
 
-		_methodParameterTypes46 = new String[] {  };
+		_methodParameterTypes52 = new String[] {  };
 
-		_methodName47 = "setBeanIdentifier";
+		_methodName53 = "setBeanIdentifier";
 
-		_methodParameterTypes47 = new String[] { "java.lang.String" };
+		_methodParameterTypes53 = new String[] { "java.lang.String" };
+
+		_methodName58 = "getCoursesByStatus";
+
+		_methodParameterTypes58 = new String[] { "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -198,16 +202,21 @@ public class CourseLocalServiceClpInvoker {
 			return CourseLocalServiceUtil.updateCourse((com.liferay.course.model.Course)arguments[0]);
 		}
 
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
 			return CourseLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName47.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			CourseLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
+		}
+
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+			return CourseLocalServiceUtil.getCoursesByStatus(((Integer)arguments[0]).intValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -245,8 +254,10 @@ public class CourseLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName46;
-	private String[] _methodParameterTypes46;
-	private String _methodName47;
-	private String[] _methodParameterTypes47;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
 }

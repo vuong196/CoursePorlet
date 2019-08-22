@@ -271,6 +271,11 @@ public class CourseLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCoursesByStatus(status);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -137,15 +137,11 @@ public class CourseSoap implements Serializable {
 		_duration = duration;
 	}
 
-	public boolean getStatus() {
+	public int getStatus() {
 		return _status;
 	}
 
-	public boolean isStatus() {
-		return _status;
-	}
-
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		_status = status;
 	}
 
@@ -155,5 +151,5 @@ public class CourseSoap implements Serializable {
 	private String _description;
 	private String _lecturer;
 	private int _duration;
-	private boolean _status;
+	private int _status;
 }

@@ -35,8 +35,27 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.course.model.impl.CourseRegistrationModelImpl">
+		<attributes>
+			<id name="id" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="courseId" />
+			<basic name="userId" />
+			<basic name="status" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.liferay.course.model.impl.CourseImpl" name="Course">
 		<table name="Course" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.course.model.impl.CourseRegistrationImpl" name="CourseRegistration">
+		<table name="CourseRegistration" />
 		<attributes />
 	</entity>
 </entity-mappings>

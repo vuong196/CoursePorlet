@@ -150,21 +150,14 @@ public interface CourseModel extends BaseModel<Course> {
 	 *
 	 * @return the status of this course
 	 */
-	public boolean getStatus();
+	public int getStatus();
 
 	/**
-	 * Returns <code>true</code> if this course is status.
-	 *
-	 * @return <code>true</code> if this course is status; <code>false</code> otherwise
-	 */
-	public boolean isStatus();
-
-	/**
-	 * Sets whether this course is status.
+	 * Sets the status of this course.
 	 *
 	 * @param status the status of this course
 	 */
-	public void setStatus(boolean status);
+	public void setStatus(int status);
 
 	@Override
 	public boolean isNew();

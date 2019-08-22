@@ -69,9 +69,9 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 			{ "Description", Types.VARCHAR },
 			{ "Lecturer", Types.VARCHAR },
 			{ "Duration", Types.INTEGER },
-			{ "Status", Types.BOOLEAN }
+			{ "Status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Course (uuid_ VARCHAR(75) null,CourseId LONG not null primary key,Name VARCHAR(75) null,Description VARCHAR(75) null,Lecturer VARCHAR(75) null,Duration INTEGER,Status BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Course (uuid_ VARCHAR(75) null,CourseId LONG not null primary key,Name VARCHAR(75) null,Description VARCHAR(75) null,Lecturer VARCHAR(75) null,Duration INTEGER,Status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table Course";
 	public static final String ORDER_BY_JPQL = " ORDER BY course.courseId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY Course.CourseId DESC";
@@ -88,7 +88,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 				"value.object.column.bitmask.enabled.com.liferay.course.model.Course"),
 			true);
 	public static long COURSEID_COLUMN_BITMASK = 1L;
-	public static long UUID_COLUMN_BITMASK = 2L;
+	public static long STATUS_COLUMN_BITMASK = 2L;
+	public static long UUID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -223,7 +224,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 			setDuration(duration);
 		}
 
-		Boolean status = (Boolean)attributes.get("status");
+		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
 			setStatus(status);
@@ -338,18 +339,25 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@JSON
 	@Override
-	public boolean getStatus() {
+	public int getStatus() {
 		return _status;
 	}
 
 	@Override
-	public boolean isStatus() {
-		return _status;
-	}
+	public void setStatus(int status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
-	@Override
-	public void setStatus(boolean status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	public long getColumnBitmask() {
@@ -455,6 +463,10 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		courseModelImpl._originalCourseId = courseModelImpl._courseId;
 
 		courseModelImpl._setOriginalCourseId = false;
+
+		courseModelImpl._originalStatus = courseModelImpl._status;
+
+		courseModelImpl._setOriginalStatus = false;
 
 		courseModelImpl._columnBitmask = 0;
 	}
@@ -580,7 +592,9 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	private String _description;
 	private String _lecturer;
 	private int _duration;
-	private boolean _status;
+	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _columnBitmask;
 	private Course _escapedModel;
 }

@@ -121,7 +121,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 			setDuration(duration);
 		}
 
-		Boolean status = (Boolean)attributes.get("status");
+		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
 			setStatus(status);
@@ -267,24 +267,19 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	}
 
 	@Override
-	public boolean getStatus() {
+	public int getStatus() {
 		return _status;
 	}
 
 	@Override
-	public boolean isStatus() {
-		return _status;
-	}
-
-	@Override
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		_status = status;
 
 		if (_courseRemoteModel != null) {
 			try {
 				Class<?> clazz = _courseRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setStatus", boolean.class);
+				Method method = clazz.getMethod("setStatus", int.class);
 
 				method.invoke(_courseRemoteModel, status);
 			}
@@ -495,6 +490,6 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 	private String _description;
 	private String _lecturer;
 	private int _duration;
-	private boolean _status;
+	private int _status;
 	private BaseModel<?> _courseRemoteModel;
 }

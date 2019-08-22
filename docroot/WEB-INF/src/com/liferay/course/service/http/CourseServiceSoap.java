@@ -62,12 +62,15 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class CourseServiceSoap {
-	public static void addCourse(java.lang.String name,
-		java.lang.String description, java.lang.String lecturer, int duration,
-		boolean status) throws RemoteException {
+	public static com.liferay.course.model.CourseSoap addCourse(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws RemoteException {
 		try {
-			CourseServiceUtil.addCourse(name, description, lecturer, duration,
-				status);
+			com.liferay.course.model.Course returnValue = CourseServiceUtil.addCourse(groupId,
+					name, description, lecturer, duration, status);
+
+			return com.liferay.course.model.CourseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -76,9 +79,13 @@ public class CourseServiceSoap {
 		}
 	}
 
-	public static void deleteCourse(long id) throws RemoteException {
+	public static com.liferay.course.model.CourseSoap deleteCourse(
+		long groupId, long id) throws RemoteException {
 		try {
-			CourseServiceUtil.deleteCourse(id);
+			com.liferay.course.model.Course returnValue = CourseServiceUtil.deleteCourse(groupId,
+					id);
+
+			return com.liferay.course.model.CourseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -115,6 +122,20 @@ public class CourseServiceSoap {
 		}
 	}
 
+	public static com.liferay.course.model.CourseSoap[] getCoursesByStatus(
+		int status) throws RemoteException {
+		try {
+			java.util.List<com.liferay.course.model.Course> returnValue = CourseServiceUtil.getCoursesByStatus(status);
+
+			return com.liferay.course.model.CourseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCoursesCount() throws RemoteException {
 		try {
 			int returnValue = CourseServiceUtil.getCoursesCount();
@@ -128,12 +149,15 @@ public class CourseServiceSoap {
 		}
 	}
 
-	public static void updateCourse(long id, java.lang.String name,
+	public static com.liferay.course.model.CourseSoap updateCourse(
+		long groupId, long id, java.lang.String name,
 		java.lang.String description, java.lang.String lecturer, int duration,
-		boolean status) throws RemoteException {
+		int status) throws RemoteException {
 		try {
-			CourseServiceUtil.updateCourse(id, name, description, lecturer,
-				duration, status);
+			com.liferay.course.model.Course returnValue = CourseServiceUtil.updateCourse(groupId,
+					id, name, description, lecturer, duration, status);
+
+			return com.liferay.course.model.CourseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

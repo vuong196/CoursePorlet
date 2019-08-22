@@ -57,15 +57,18 @@ public class CourseServiceWrapper implements CourseService,
 	}
 
 	@Override
-	public void addCourse(java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, boolean status)
+	public com.liferay.course.model.Course addCourse(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
 		throws java.lang.Exception {
-		_courseService.addCourse(name, description, lecturer, duration, status);
+		return _courseService.addCourse(groupId, name, description, lecturer,
+			duration, status);
 	}
 
 	@Override
-	public void deleteCourse(long id) throws java.lang.Exception {
-		_courseService.deleteCourse(id);
+	public com.liferay.course.model.Course deleteCourse(long groupId, long id)
+		throws java.lang.Exception {
+		return _courseService.deleteCourse(groupId, id);
 	}
 
 	@Override
@@ -81,16 +84,23 @@ public class CourseServiceWrapper implements CourseService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return _courseService.getCoursesByStatus(status);
+	}
+
+	@Override
 	public int getCoursesCount() throws java.lang.Exception {
 		return _courseService.getCoursesCount();
 	}
 
 	@Override
-	public void updateCourse(long id, java.lang.String name,
-		java.lang.String description, java.lang.String lecturer, int duration,
-		boolean status) throws java.lang.Exception {
-		_courseService.updateCourse(id, name, description, lecturer, duration,
-			status);
+	public com.liferay.course.model.Course updateCourse(long groupId, long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws java.lang.Exception {
+		return _courseService.updateCourse(groupId, id, name, description,
+			lecturer, duration, status);
 	}
 
 	/**
