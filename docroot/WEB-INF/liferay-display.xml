@@ -6,5 +6,6 @@
 		<portlet id="Course" />
 		<portlet id="course-list"></portlet>
 		<portlet id="course-registration"></portlet>
+		<portlet id="registration-approval"></portlet>
 	</category>
 </display>
