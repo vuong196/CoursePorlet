@@ -30,7 +30,39 @@
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
 		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
+	<entity name="CourseRegistration" local-service="true" remote-service="true" table="CourseRegistration" uuid="true">
+		<!-- PK fields -->
+		<column name="id" type="long" primary="true" db-name="id"/>
 
+		<!--  Foreign key -->
+		<column name="courseId" type="long" db-name="courseId"/>
+		<column name="userId" type="long" db-name="userId"/>
+
+		<!-- Other fields -->
+		<column name="status" type="int" db-name="status"/>
+
+		<finder name="Course_User" return-type="Course_User">
+			<finder-column name="courseId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="User_Status" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
+		<finder name="UserId" return-type="Collection" where="status!=-1">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="CourseId" return-type="Collection">
+			<finder-column name="courseId"/>
+		</finder>
+		<finder name="Course_Status" return-type="Collection">
+			<finder-column name="courseId" />
+			<finder-column name="status" />
+		</finder>
+	</entity>
 	<exceptions>
 		<exception>CourseName</exception>
 		<exception>EntryName</exception>
