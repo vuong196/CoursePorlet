@@ -150,10 +150,8 @@ public class CourseRegistrationServiceClpInvoker {
 
 		if (_methodName40.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
-			CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(((Long)arguments[0]).longValue(),
+			return CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue());
-
-			return null;
 		}
 
 		throw new UnsupportedOperationException();

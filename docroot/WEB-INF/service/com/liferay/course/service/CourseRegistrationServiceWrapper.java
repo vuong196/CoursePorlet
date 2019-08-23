@@ -123,9 +123,10 @@ public class CourseRegistrationServiceWrapper
 	}
 
 	@Override
-	public void updateStatusOfCourseRegistration(long id, int status)
-		throws java.lang.Exception {
-		_courseRegistrationService.updateStatusOfCourseRegistration(id, status);
+	public com.liferay.course.model.CourseRegistration updateStatusOfCourseRegistration(
+		long id, int status) throws java.lang.Exception {
+		return _courseRegistrationService.updateStatusOfCourseRegistration(id,
+			status);
 	}
 
 	/**

@@ -115,9 +115,9 @@ public class CourseRegistrationServiceUtil {
 		return getService().isFullRegistered(courseId);
 	}
 
-	public static void updateStatusOfCourseRegistration(long id, int status)
-		throws java.lang.Exception {
-		getService().updateStatusOfCourseRegistration(id, status);
+	public static com.liferay.course.model.CourseRegistration updateStatusOfCourseRegistration(
+		long id, int status) throws java.lang.Exception {
+		return getService().updateStatusOfCourseRegistration(id, status);
 	}
 
 	public static void clearService() {

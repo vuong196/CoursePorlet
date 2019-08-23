@@ -211,11 +211,13 @@ public class CourseRegistrationServiceSoap {
 		}
 	}
 
-	public static void updateStatusOfCourseRegistration(long id, int status)
-		throws RemoteException {
+	public static com.liferay.course.model.CourseRegistrationSoap updateStatusOfCourseRegistration(
+		long id, int status) throws RemoteException {
 		try {
-			CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id,
-				status);
+			com.liferay.course.model.CourseRegistration returnValue = CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id,
+					status);
+
+			return com.liferay.course.model.CourseRegistrationSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

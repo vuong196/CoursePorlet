@@ -101,6 +101,6 @@ public interface CourseRegistrationService extends BaseService, InvokableService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isFullRegistered(long courseId) throws java.lang.Exception;
 
-	public void updateStatusOfCourseRegistration(long id, int status)
-		throws java.lang.Exception;
+	public com.liferay.course.model.CourseRegistration updateStatusOfCourseRegistration(
+		long id, int status) throws java.lang.Exception;
 }

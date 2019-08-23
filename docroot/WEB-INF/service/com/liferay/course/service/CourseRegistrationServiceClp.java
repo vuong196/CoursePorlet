@@ -408,11 +408,13 @@ public class CourseRegistrationServiceClp implements CourseRegistrationService {
 	}
 
 	@Override
-	public void updateStatusOfCourseRegistration(long id, int status)
-		throws java.lang.Exception {
+	public com.liferay.course.model.CourseRegistration updateStatusOfCourseRegistration(
+		long id, int status) throws java.lang.Exception {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName13,
-				_methodParameterTypes13, new Object[] { id, status });
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13, new Object[] { id, status });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -429,6 +431,8 @@ public class CourseRegistrationServiceClp implements CourseRegistrationService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.liferay.course.model.CourseRegistration)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableService _invokableService;
