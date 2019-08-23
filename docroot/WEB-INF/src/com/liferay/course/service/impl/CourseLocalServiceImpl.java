@@ -16,10 +16,16 @@ package com.liferay.course.service.impl;
 
 import java.util.List;
 
+import com.liferay.course.EntryDescriptionException;
+import com.liferay.course.EntryDurationException;
+import com.liferay.course.EntryLecturerException;
+import com.liferay.course.EntryNameException;
 import com.liferay.course.model.Course;
 import com.liferay.course.service.base.CourseLocalServiceBaseImpl;
 import com.liferay.course.service.persistence.CourseUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the course local service.
@@ -50,8 +56,63 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	 */
 
 	@Override
+	public Course addCourse(String name, String description, String lecturer, int duration, int status)
+		throws PortalException, SystemException {
+
+		_validator(name, description, lecturer, duration, status);
+
+		Course course = courseLocalService.createCourse(counterLocalService.increment(Course.class.getName()));
+		course.setName(name);
+		course.setDescription(description);
+		course.setLecturer(lecturer);
+		course.setDuration(duration);
+		course.setStatus(status);
+
+		return courseLocalService.addCourse(course);
+	}
+
+	@Override
 	public List<Course> getCoursesByStatus(int status) throws SystemException {
 
 		return CourseUtil.findBystatus(status);
+	}
+
+	@Override
+	public Course updateCourse(long id, String name, String description, String lecturer, int duration, int status)
+		throws PortalException, SystemException {
+
+		_validator(name, description, lecturer, duration, status);
+
+		Course course = courseLocalService.fetchCourse(id);
+		course.setName(name);
+		course.setDescription(description);
+		course.setLecturer(lecturer);
+		course.setDuration(duration);
+		course.setStatus(status);
+		return CourseUtil.update(course);
+	}
+
+	private void _validator(String name, String description, String lecturer, int duration, int status)
+		throws PortalException {
+
+		if (Validator.isNull(name) || name.length() > 75) {
+			throw new EntryNameException("");
+		}
+
+		if (description.length() > 2000) {
+			throw new EntryDescriptionException();
+		}
+
+		if (Validator.isNull(lecturer) || lecturer.length() > 75) {
+			throw new EntryLecturerException();
+		}
+
+		if (duration < 1 || duration > 40) {
+			throw new EntryDurationException();
+		}
+
+		if (Validator.isNull(status)) {
+			throw new EntryDurationException();
+		}
 	}
 }
