@@ -8,6 +8,7 @@ import javax.portlet.ActionResponse;
 
 import com.liferay.course.model.CourseRegistration;
 import com.liferay.course.service.CourseRegistrationServiceUtil;
+import com.liferay.course.util.CourseRegistrationStatus;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -21,14 +22,15 @@ public class RegistrationApproval extends MVCPortlet {
 
 		long courseId = ParamUtil.getLong(actionRequest, "courseId");
 
-		List<CourseRegistration> c = CourseRegistrationServiceUtil
-			.getCourseRegistrationByCourseIdAndStatus(courseId, 0);
+		List<CourseRegistration> c = CourseRegistrationServiceUtil.getCourseRegistrationByCourseIdAndStatus(courseId,
+			CourseRegistrationStatus.APPROVED.getStatusNumber());
 
 		if (c.size() < 20) {
 
 			long id = ParamUtil.getLong(actionRequest, "id");
 
-			CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id, 1);
+			CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id,
+				CourseRegistrationStatus.APPROVED.getStatusNumber());
 		}
 		else {
 
@@ -40,6 +42,15 @@ public class RegistrationApproval extends MVCPortlet {
 
 		long id = ParamUtil.getLong(actionRequest, "id");
 
-		CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id, -1);
+		try {
+
+			CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id,
+				CourseRegistrationStatus.REJECTED.getStatusNumber());
+		}
+		catch(Exception e) {
+
+			SessionErrors.add(actionRequest, "error");
+		}
+		
 	}
 }

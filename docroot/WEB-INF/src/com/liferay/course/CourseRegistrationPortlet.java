@@ -6,10 +6,10 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
-import com.liferay.course.model.Course;
 import com.liferay.course.model.CourseRegistration;
 import com.liferay.course.service.CourseRegistrationServiceUtil;
-import com.liferay.course.service.CourseServiceUtil;
+import com.liferay.course.util.CourseRegistrationStatus;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -21,14 +21,24 @@ public class CourseRegistrationPortlet extends MVCPortlet {
 
 	public void deleteCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
+		CourseRegistrationStatus rejectedStatus = CourseRegistrationStatus.REJECTED;
+
 		long userId = ParamUtil.getLong(actionRequest, "userId");
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long id = ParamUtil.getLong(actionRequest, "id");
 		CourseRegistration CourseRegistration = CourseRegistrationServiceUtil.getCourseRegistrationById(id);
 
-		if (CourseRegistration.getStatus() == -1 && CourseRegistration.getUserId() == userId) {
+		if (CourseRegistration.getStatus() == rejectedStatus.getStatusNumber()
+			&& CourseRegistration.getUserId() == userId) {
 
-			CourseRegistrationServiceUtil.deleteCourseRegistration(groupId, id);
+			try {
+
+				CourseRegistrationServiceUtil.deleteCourseRegistration(groupId, id);
+			}
+			catch (Exception e) {
+
+				SessionErrors.add(actionRequest, "error");
+			}
 		}
 	}
 
@@ -37,7 +47,16 @@ public class CourseRegistrationPortlet extends MVCPortlet {
 
 		long id = ParamUtil.getLong(actionRequest, "id");
 
-		CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id, 2);
+		try {
+
+			CourseRegistrationServiceUtil.updateStatusOfCourseRegistration(id,
+				CourseRegistrationStatus.DELETED.getStatusNumber());
+		}
+		catch (Exception e) {
+
+			SessionErrors.add(actionRequest, "error");
+		}
+
 	}
 
 	public List<CourseRegistration> getAvailableCourseRegistrationsByUserId(ActionRequest actionRequest,
@@ -45,14 +64,7 @@ public class CourseRegistrationPortlet extends MVCPortlet {
 
 		long userId = ParamUtil.getLong(actionRequest, "userId");
 
-		System.out.println(userId);
 		return CourseRegistrationServiceUtil.getAvailableCourseRegistrationsByUserId(userId);
-	}
-
-	public List<Course> getAvailableCoursesByUserId(ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		return CourseServiceUtil.getCoursesByStatus(1);
 	}
 
 	public void registerCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
