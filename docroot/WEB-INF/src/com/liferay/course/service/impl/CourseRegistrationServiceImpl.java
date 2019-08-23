@@ -44,7 +44,7 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 *
+	 * 
 	 * Never reference this interface directly. Always use {@link
 	 * com.liferay.course.service.CourseRegistrationServiceUtil} to access the
 	 * course registration remote service.
@@ -114,13 +114,29 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 	public List<CourseRegistration> getCourseRegistrationByCourseIdAndStatus(long courseId, int status)
 		throws Exception {
 
-		return CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseIdAndStatus(courseId, status);
+		try {
+
+			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseIdAndStatus(courseId, status);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
+
 	}
 
 	@Override
 	public CourseRegistration getCourseRegistrationById(long id) throws Exception {
 
-		return CourseRegistrationLocalServiceUtil.getCourseRegistration(id);
+		try {
+
+			return CourseRegistrationLocalServiceUtil.getCourseRegistration(id);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
+
 	}
 
 	@Override
@@ -141,13 +157,29 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 	@Override
 	public CourseRegistration getCourseRegistrationByUserIdAndCourseId(long userId, long courseId) throws Exception {
 
-		return CourseRegistrationLocalServiceUtil.getCourseRegistrationByUserIdAndCourseId(userId, courseId);
+		try {
+
+			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByUserIdAndCourseId(userId, courseId);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
+
 	}
 
 	@Override
 	public List<CourseRegistration> getCourseRegistrationsByUserId(long userId) throws Exception {
 
-		return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByUserId(userId);
+		try {
+
+			return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByUserId(userId);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
+
 	}
 
 	@Override
@@ -167,11 +199,18 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 	}
 
 	@Override
-	public void updateStatusOfCourseRegistration(long id, int status) throws Exception {
+	public CourseRegistration updateStatusOfCourseRegistration(long id, int status) throws Exception {
 
-		CourseRegistration courseRegistration = CourseRegistrationLocalServiceUtil.fetchCourseRegistration(id);
-		courseRegistration.setStatus(status);
-		CourseRegistrationLocalServiceUtil.updateCourseRegistration(courseRegistration);
+		try {
+
+			CourseRegistration courseRegistration = CourseRegistrationLocalServiceUtil.fetchCourseRegistration(id);
+			courseRegistration.setStatus(status);
+			return CourseRegistrationLocalServiceUtil.updateCourseRegistration(courseRegistration);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
 
 	}
 }
