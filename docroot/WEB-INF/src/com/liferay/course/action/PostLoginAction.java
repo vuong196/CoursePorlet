@@ -38,7 +38,7 @@ public class PostLoginAction extends Action {
 
 		String path = getPage(request);
 
-		if (Validator.isNotNull(path)) {
+		if (Validator.isBlank(path)) {
 
 			HttpSession session = request.getSession();
 			session.setAttribute(WebKeys.LAST_PATH, new LastPath(StringPool.BLANK, path));

@@ -7,7 +7,6 @@
 	User u = themeDisplay.getUser();
 	List<Course> availableCourses = CourseServiceUtil.getCoursesByStatus(1);
 	List<CourseRegistration> ownerCourseRegistrations = CourseRegistrationServiceUtil.getCourseRegistrationsByUserId(u.getUserId());
-	System.out.println(ownerCourseRegistrations.size());
 	PortletURL viewCourseUrl = renderResponse.createRenderURL();
 	viewCourseUrl.setParameter("mvcPath", "/courseregistration/view.jsp");
 %>

@@ -19,7 +19,6 @@ public class AutoLoginAction implements AutoLogin {
 	public String[] handleException(HttpServletRequest arg0, HttpServletResponse arg1, Exception arg2)
 		throws AutoLoginException {
 
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -50,10 +49,8 @@ public class AutoLoginAction implements AutoLogin {
 
 			return null;
 		}
-		finally {
-
-			return null;
-		}
+		
+		return null;
 	}
 	
 	private boolean _isStaff(List<Role> roleList) {
