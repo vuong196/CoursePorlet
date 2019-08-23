@@ -245,7 +245,19 @@ public interface CourseLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	public com.liferay.course.model.Course addCourse(java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
 		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.course.model.Course updateCourse(long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

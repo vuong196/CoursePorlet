@@ -271,9 +271,28 @@ public class CourseLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.course.model.Course addCourse(
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addCourse(name, description, lecturer, duration, status);
+	}
+
 	public static java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCoursesByStatus(status);
+	}
+
+	public static com.liferay.course.model.Course updateCourse(long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateCourse(id, name, description, lecturer, duration,
+			status);
 	}
 
 	public static void clearService() {
