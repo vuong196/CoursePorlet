@@ -252,28 +252,24 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
+		if (className.equals("com.liferay.course.CourseDescriptionException")) {
+			return new com.liferay.course.CourseDescriptionException();
+		}
+
+		if (className.equals("com.liferay.course.CourseDurationException")) {
+			return new com.liferay.course.CourseDurationException();
+		}
+
+		if (className.equals("com.liferay.course.CourseLecturerException")) {
+			return new com.liferay.course.CourseLecturerException();
+		}
+
 		if (className.equals("com.liferay.course.CourseNameException")) {
 			return new com.liferay.course.CourseNameException();
 		}
 
-		if (className.equals("com.liferay.course.EntryDescriptionException")) {
-			return new com.liferay.course.EntryDescriptionException();
-		}
-
-		if (className.equals("com.liferay.course.EntryDurationException")) {
-			return new com.liferay.course.EntryDurationException();
-		}
-
-		if (className.equals("com.liferay.course.EntryLecturerException")) {
-			return new com.liferay.course.EntryLecturerException();
-		}
-
-		if (className.equals("com.liferay.course.EntryNameException")) {
-			return new com.liferay.course.EntryNameException();
-		}
-
-		if (className.equals("com.liferay.course.EntryStatusException")) {
-			return new com.liferay.course.EntryStatusException();
+		if (className.equals("com.liferay.course.CourseStatusException")) {
+			return new com.liferay.course.CourseStatusException();
 		}
 
 		if (className.equals("com.liferay.course.NoSuchCourseException")) {
