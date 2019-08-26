@@ -16,10 +16,11 @@ package com.liferay.course.service.impl;
 
 import java.util.List;
 
-import com.liferay.course.EntryDescriptionException;
-import com.liferay.course.EntryDurationException;
-import com.liferay.course.EntryLecturerException;
-import com.liferay.course.EntryNameException;
+import com.liferay.course.CourseDescriptionException;
+import com.liferay.course.CourseDurationException;
+import com.liferay.course.CourseLecturerException;
+import com.liferay.course.CourseNameException;
+import com.liferay.course.CourseStatusException;
 import com.liferay.course.model.Course;
 import com.liferay.course.service.base.CourseLocalServiceBaseImpl;
 import com.liferay.course.service.persistence.CourseUtil;
@@ -49,7 +50,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 * 
+	 *
 	 * Never reference this interface directly. Always use {@link
 	 * com.liferay.course.service.CourseLocalServiceUtil} to access the course
 	 * local service.
@@ -96,23 +97,23 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		throws PortalException {
 
 		if (Validator.isNull(name) || name.length() > 75) {
-			throw new EntryNameException("");
+			throw new CourseNameException("");
 		}
 
 		if (description.length() > 2000) {
-			throw new EntryDescriptionException();
+			throw new CourseDescriptionException();
 		}
 
 		if (Validator.isNull(lecturer) || lecturer.length() > 75) {
-			throw new EntryLecturerException();
+			throw new CourseLecturerException();
 		}
 
 		if (duration < 1 || duration > 40) {
-			throw new EntryDurationException();
+			throw new CourseDurationException();
 		}
 
 		if (Validator.isNull(status)) {
-			throw new EntryDurationException();
+			throw new CourseStatusException();
 		}
 	}
 }
