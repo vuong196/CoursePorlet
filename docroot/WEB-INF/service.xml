@@ -65,10 +65,9 @@
 	</entity>
 	<exceptions>
 		<exception>CourseName</exception>
-		<exception>EntryName</exception>
-		<exception>EntryDescription</exception>
-		<exception>EntryLecturer</exception>
-		<exception>EntryDuration</exception>
-		<exception>EntryStatus</exception>
+		<exception>CourseDescription</exception>
+		<exception>CourseLecturer</exception>
+		<exception>CourseDuration</exception>
+		<exception>CourseStatus</exception>
 	</exceptions>
 </service-builder>
