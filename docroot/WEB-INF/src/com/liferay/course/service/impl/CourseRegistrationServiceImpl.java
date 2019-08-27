@@ -16,10 +16,10 @@ package com.liferay.course.service.impl;
 
 import java.util.List;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.course.model.CourseRegistration;
-import com.liferay.course.service.CourseRegistrationLocalServiceUtil;
 import com.liferay.course.service.base.CourseRegistrationServiceBaseImpl;
+import com.liferay.course.service.permission.CourseRegistrationPermission;
+import com.liferay.course.util.MyActionKeys;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -53,18 +53,20 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 	@Override
 	public CourseRegistration addCourseRegistration(long groupId, long courseId, long userId) throws Exception {
 
-		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "REGISTER")) {
+		CourseRegistrationPermission.check(getPermissionChecker(), groupId, MyActionKeys.REGISTER_COURSE);
 
-			CourseRegistration courseRegistration = CourseRegistrationLocalServiceUtil
-				.createCourseRegistration(CounterLocalServiceUtil.increment());
+		try {
+
+			CourseRegistration courseRegistration = courseRegistrationLocalService
+				.createCourseRegistration(counterLocalService.increment());
 
 			courseRegistration.setCourseId(courseId);
 			courseRegistration.setUserId(userId);
 			courseRegistration.setStatus(0);
 
-			return CourseRegistrationLocalServiceUtil.addCourseRegistration(courseRegistration);
+			return courseRegistrationLocalService.addCourseRegistration(courseRegistration);
 		}
-		else {
+		catch (Exception e) {
 
 			return null;
 		}
@@ -73,16 +75,17 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 	@Override
 	public CourseRegistration changeCourseRegistrationStatus(long groupId, long id, int status) throws Exception {
 
-		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.CourseRegistration", groupId,
-			"REGISTER")) {
+		CourseRegistrationPermission.check(getPermissionChecker(), groupId, MyActionKeys.REGISTER_COURSE);
 
-			CourseRegistration courseRegistration = CourseRegistrationLocalServiceUtil.fetchCourseRegistration(id);
+		CourseRegistration courseRegistration = courseRegistrationLocalService.fetchCourseRegistration(id);
 
-			courseRegistration.setStatus(status);
+		courseRegistration.setStatus(status);
 
-			return CourseRegistrationLocalServiceUtil.updateCourseRegistration(courseRegistration);
+		try {
+
+			return courseRegistrationLocalService.updateCourseRegistration(courseRegistration);
 		}
-		else {
+		catch (Exception e) {
 
 			return null;
 		}
@@ -92,22 +95,22 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 	@Override
 	public CourseRegistration deleteCourseRegistration(long groupId, long id) throws Exception {
 
-		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.CourseRegistration", groupId,
-			"DELETE")) {
+		CourseRegistrationPermission.check(getPermissionChecker(), groupId, MyActionKeys.DELETE_COURSE);
 
-			return CourseRegistrationLocalServiceUtil.deleteCourseRegistration(id);
+		try {
+
+			return courseRegistrationLocalService.deleteCourseRegistration(id);
 		}
-		else {
+		catch (Exception e) {
 
 			return null;
 		}
-
 	}
 
 	@Override
 	public List<CourseRegistration> getAvailableCourseRegistrationsByUserId(long userId) throws Exception {
 
-		return CourseRegistrationLocalServiceUtil.getAvailableCourseRegistrationsByUserId(userId);
+		return courseRegistrationLocalService.getAvailableCourseRegistrationsByUserId(userId);
 	}
 
 	@Override
@@ -116,13 +119,12 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 		try {
 
-			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseIdAndStatus(courseId, status);
+			return courseRegistrationLocalService.getCourseRegistrationByCourseIdAndStatus(courseId, status);
 		}
 		catch (Exception e) {
 
 			return null;
 		}
-
 	}
 
 	@Override
@@ -130,13 +132,12 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 		try {
 
-			return CourseRegistrationLocalServiceUtil.getCourseRegistration(id);
+			return courseRegistrationLocalService.getCourseRegistration(id);
 		}
 		catch (Exception e) {
 
 			return null;
 		}
-
 	}
 
 	@Override
@@ -145,7 +146,7 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 		List<CourseRegistration> courseRegistrationList = null;
 		try {
 
-			courseRegistrationList = CourseRegistrationLocalServiceUtil.getCourseRegistrationsByStatus(status);
+			courseRegistrationList = courseRegistrationLocalService.getCourseRegistrationsByStatus(status);
 			return courseRegistrationList;
 		}
 		catch (Exception e) {
@@ -159,13 +160,12 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 		try {
 
-			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByUserIdAndCourseId(userId, courseId);
+			return courseRegistrationLocalService.getCourseRegistrationByUserIdAndCourseId(userId, courseId);
 		}
 		catch (Exception e) {
 
 			return null;
 		}
-
 	}
 
 	@Override
@@ -173,20 +173,19 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 		try {
 
-			return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByUserId(userId);
+			return courseRegistrationLocalService.getCourseRegistrationsByUserId(userId);
 		}
 		catch (Exception e) {
 
 			return null;
 		}
-
 	}
 
 	@Override
 	public boolean isFullRegistered(long courseId) throws Exception {
 
 		List<CourseRegistration> courseRegistrationList;
-		courseRegistrationList = CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseId(courseId);
+		courseRegistrationList = courseRegistrationLocalService.getCourseRegistrationByCourseId(courseId);
 
 		if (courseRegistrationList.size() > 19) {
 
@@ -203,14 +202,13 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 		try {
 
-			CourseRegistration courseRegistration = CourseRegistrationLocalServiceUtil.fetchCourseRegistration(id);
+			CourseRegistration courseRegistration = courseRegistrationLocalService.fetchCourseRegistration(id);
 			courseRegistration.setStatus(status);
-			return CourseRegistrationLocalServiceUtil.updateCourseRegistration(courseRegistration);
+			return courseRegistrationLocalService.updateCourseRegistration(courseRegistration);
 		}
 		catch (Exception e) {
 
 			return null;
 		}
-
 	}
 }
