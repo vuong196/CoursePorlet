@@ -295,12 +295,6 @@ public class CourseRegistrationLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
-		return _courseRegistrationLocalService.getCourseRegistrationsByUserId(userId);
-	}
-
-	@Override
 	public java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationByCourseId(
 		long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -328,6 +322,12 @@ public class CourseRegistrationLocalServiceWrapper
 	public java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByStatus(
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return _courseRegistrationLocalService.getCourseRegistrationsByStatus(status);
+	}
+
+	@Override
+	public java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _courseRegistrationLocalService.getCourseRegistrationsByUserId(userId);
 	}
 
 	@Override

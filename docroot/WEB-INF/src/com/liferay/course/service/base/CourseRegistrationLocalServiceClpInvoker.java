@@ -118,25 +118,25 @@ public class CourseRegistrationLocalServiceClpInvoker {
 
 		_methodParameterTypes46 = new String[] { "long" };
 
-		_methodName47 = "getCourseRegistrationsByUserId";
+		_methodName47 = "getCourseRegistrationByCourseId";
 
 		_methodParameterTypes47 = new String[] { "long" };
 
-		_methodName48 = "getCourseRegistrationByCourseId";
+		_methodName48 = "getCourseRegistrationByCourseIdAndStatus";
 
-		_methodParameterTypes48 = new String[] { "long" };
+		_methodParameterTypes48 = new String[] { "long", "int" };
 
-		_methodName49 = "getCourseRegistrationByCourseIdAndStatus";
+		_methodName49 = "getCourseRegistrationByUserIdAndCourseId";
 
-		_methodParameterTypes49 = new String[] { "long", "int" };
+		_methodParameterTypes49 = new String[] { "long", "long" };
 
-		_methodName50 = "getCourseRegistrationByUserIdAndCourseId";
+		_methodName50 = "getCourseRegistrationsByStatus";
 
-		_methodParameterTypes50 = new String[] { "long", "long" };
+		_methodParameterTypes50 = new String[] { "int" };
 
-		_methodName51 = "getCourseRegistrationsByStatus";
+		_methodName51 = "getCourseRegistrationsByUserId";
 
-		_methodParameterTypes51 = new String[] { "int" };
+		_methodParameterTypes51 = new String[] { "long" };
 
 		_methodName52 = "getCourseRegistrationsByUserIdAndStatus";
 
@@ -255,29 +255,29 @@ public class CourseRegistrationLocalServiceClpInvoker {
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByUserId(((Long)arguments[0]).longValue());
+			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseId(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByCourseIdAndStatus(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			return CourseRegistrationLocalServiceUtil.getCourseRegistrationByUserIdAndCourseId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByStatus(((Integer)arguments[0]).intValue());
+		}
+
 		if (_methodName51.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
-			return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByStatus(((Integer)arguments[0]).intValue());
+			return CourseRegistrationLocalServiceUtil.getCourseRegistrationsByUserId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName52.equals(name) &&

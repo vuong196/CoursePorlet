@@ -279,11 +279,6 @@ public class CourseRegistrationLocalServiceUtil {
 		return getService().getAvailableCourseRegistrationsByUserId(userId);
 	}
 
-	public static java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCourseRegistrationsByUserId(userId);
-	}
-
 	public static java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationByCourseId(
 		long courseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -308,6 +303,11 @@ public class CourseRegistrationLocalServiceUtil {
 	public static java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByStatus(
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCourseRegistrationsByStatus(status);
+	}
+
+	public static java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCourseRegistrationsByUserId(userId);
 	}
 
 	public static java.util.List<com.liferay.course.model.CourseRegistration> getCourseRegistrationsByUserIdAndStatus(
