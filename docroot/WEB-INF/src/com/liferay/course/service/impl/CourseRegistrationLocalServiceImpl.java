@@ -20,8 +20,6 @@ import com.liferay.course.NoSuchCourseRegistrationException;
 import com.liferay.course.model.Course;
 import com.liferay.course.model.CourseRegistration;
 import com.liferay.course.service.base.CourseRegistrationLocalServiceBaseImpl;
-import com.liferay.course.service.persistence.CourseRegistrationUtil;
-import com.liferay.course.service.persistence.CourseUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -55,50 +53,51 @@ public class CourseRegistrationLocalServiceImpl extends CourseRegistrationLocalS
 	@Override
 	public List<CourseRegistration> getAvailableCourseRegistrationsByUserId(long userId) throws SystemException {
 
-		return CourseRegistrationUtil.findByUser_Status(userId, 1);
-	}
-	
-	public List<CourseRegistration> getCourseRegistrationsByUserId(long userId) throws SystemException {
-
-		return CourseRegistrationUtil.findByUserId(userId);
+		return courseRegistrationPersistence.findByUser_Status(userId, 1);
 	}
 
 	@Override
 	public List<CourseRegistration> getCourseRegistrationByCourseId(long courseId) throws SystemException {
 
-		return CourseRegistrationUtil.findByCourseId(courseId);
+		return courseRegistrationPersistence.findByCourseId(courseId);
 	}
 
 	@Override
 	public List<CourseRegistration> getCourseRegistrationByCourseIdAndStatus(long courseId, int status)
 		throws SystemException {
 
-		return CourseRegistrationUtil.findByCourse_Status(courseId, status);
+		return courseRegistrationPersistence.findByCourse_Status(courseId, status);
 	}
 
 	@Override
 	public CourseRegistration getCourseRegistrationByUserIdAndCourseId(long userId, long courseId)
 		throws SystemException, NoSuchCourseRegistrationException {
 
-		return CourseRegistrationUtil.findByCourse_User(courseId, userId);
+		return courseRegistrationPersistence.findByCourse_User(courseId, userId);
 	}
 
 	@Override
 	public List<CourseRegistration> getCourseRegistrationsByStatus(int status) throws SystemException {
 
-		return CourseRegistrationUtil.findByStatus(status);
+		return courseRegistrationPersistence.findByStatus(status);
+	}
+
+	@Override
+	public List<CourseRegistration> getCourseRegistrationsByUserId(long userId) throws SystemException {
+
+		return courseRegistrationPersistence.findByUserId(userId);
 	}
 
 	@Override
 	public List<CourseRegistration> getCourseRegistrationsByUserIdAndStatus(long userId, int status)
 		throws SystemException {
 
-		return CourseRegistrationUtil.findByUser_Status(userId, status);
+		return courseRegistrationPersistence.findByUser_Status(userId, status);
 	}
 
 	@Override
 	public List<Course> getCoursesByStatus(int status) throws SystemException {
 
-		return CourseUtil.findBystatus(status);
+		return coursePersistence.findBystatus(status);
 	}
 }

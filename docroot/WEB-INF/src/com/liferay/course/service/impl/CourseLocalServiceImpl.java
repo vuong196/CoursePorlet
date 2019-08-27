@@ -75,7 +75,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	@Override
 	public List<Course> getCoursesByStatus(int status) throws SystemException {
 
-		return CourseUtil.findBystatus(status);
+		return coursePersistence.findBystatus(status);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setLecturer(lecturer);
 		course.setDuration(duration);
 		course.setStatus(status);
-		return CourseUtil.update(course);
+		return coursePersistence.update(course);
 	}
 
 	private void _validator(String name, String description, String lecturer, int duration, int status)
