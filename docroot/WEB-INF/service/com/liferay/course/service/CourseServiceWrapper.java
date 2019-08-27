@@ -57,12 +57,12 @@ public class CourseServiceWrapper implements CourseService,
 	}
 
 	@Override
-	public com.liferay.course.model.Course addCourse(long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+	public com.liferay.course.model.Course addCourse(java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		return _courseService.addCourse(groupId, name, description, lecturer,
-			duration, status);
+		return _courseService.addCourse(name, description, lecturer, duration,
+			status, serviceContext);
 	}
 
 	@Override
@@ -95,12 +95,13 @@ public class CourseServiceWrapper implements CourseService,
 	}
 
 	@Override
-	public com.liferay.course.model.Course updateCourse(long groupId, long id,
+	public com.liferay.course.model.Course updateCourse(long id,
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		return _courseService.updateCourse(groupId, id, name, description,
-			lecturer, duration, status);
+		return _courseService.updateCourse(id, name, description, lecturer,
+			duration, status, serviceContext);
 	}
 
 	/**

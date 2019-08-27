@@ -12,6 +12,7 @@
 	<portlet>
 		<portlet-name>course-list</portlet-name>
 		<icon>/icon.png</icon>
+		<indexer-class>com.liferay.course.indexer.CourseIndexer</indexer-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -56,4 +57,5 @@
 		<role-name>user</role-name>
 		<role-link>User</role-link>
 	</role-mapper>
+	
 </liferay-portlet-app>

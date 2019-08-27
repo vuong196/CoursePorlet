@@ -112,18 +112,25 @@ public class CourseLocalServiceClpInvoker {
 
 		_methodParameterTypes58 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "int"
+				"int", "int", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName59 = "getCoursesByStatus";
+		_methodName59 = "deleteCourse";
 
-		_methodParameterTypes59 = new String[] { "int" };
+		_methodParameterTypes59 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName60 = "updateCourse";
+		_methodName60 = "getCoursesByStatus";
 
-		_methodParameterTypes60 = new String[] {
+		_methodParameterTypes60 = new String[] { "int" };
+
+		_methodName61 = "updateCourse";
+
+		_methodParameterTypes61 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"java.lang.String", "int", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -233,21 +240,29 @@ public class CourseLocalServiceClpInvoker {
 			return CourseLocalServiceUtil.addCourse((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue(),
-				((Integer)arguments[4]).intValue());
+				((Integer)arguments[4]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			return CourseLocalServiceUtil.getCoursesByStatus(((Integer)arguments[0]).intValue());
+			return CourseLocalServiceUtil.deleteCourse(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName60.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+			return CourseLocalServiceUtil.getCoursesByStatus(((Integer)arguments[0]).intValue());
+		}
+
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			return CourseLocalServiceUtil.updateCourse(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
 				((Integer)arguments[4]).intValue(),
-				((Integer)arguments[5]).intValue());
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -295,4 +310,6 @@ public class CourseLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName60;
 	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
 }

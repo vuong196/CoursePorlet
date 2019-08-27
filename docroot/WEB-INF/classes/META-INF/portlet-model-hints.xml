@@ -8,6 +8,13 @@
 		<field name="description" type="String" />
 		<field name="lecturer" type="String" />
 		<field name="duration" type="int" />
-		<field name="status" type="boolean" />
+		<field name="status" type="int" />
+	</model>
+	<model name="com.liferay.course.model.CourseRegistration">
+		<field name="uuid" type="String" />
+		<field name="id" type="long" />
+		<field name="courseId" type="long" />
+		<field name="userId" type="long" />
+		<field name="status" type="int" />
 	</model>
 </model-hints>

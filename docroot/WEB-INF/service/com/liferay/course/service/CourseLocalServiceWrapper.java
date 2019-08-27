@@ -283,11 +283,19 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 	@Override
 	public com.liferay.course.model.Course addCourse(java.lang.String name,
 		java.lang.String description, java.lang.String lecturer, int duration,
-		int status)
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _courseLocalService.addCourse(name, description, lecturer,
-			duration, status);
+			duration, status, serviceContext);
+	}
+
+	@Override
+	public com.liferay.course.model.Course deleteCourse(long courseId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _courseLocalService.deleteCourse(courseId, serviceContext);
 	}
 
 	@Override
@@ -299,11 +307,12 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 	@Override
 	public com.liferay.course.model.Course updateCourse(long id,
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _courseLocalService.updateCourse(id, name, description,
-			lecturer, duration, status);
+			lecturer, duration, status, serviceContext);
 	}
 
 	/**

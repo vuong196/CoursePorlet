@@ -23,10 +23,12 @@ import com.liferay.course.CourseNameException;
 import com.liferay.course.CourseStatusException;
 import com.liferay.course.model.Course;
 import com.liferay.course.service.base.CourseLocalServiceBaseImpl;
-import com.liferay.course.service.persistence.CourseUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the course local service.
@@ -57,8 +59,8 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	 */
 
 	@Override
-	public Course addCourse(String name, String description, String lecturer, int duration, int status)
-		throws PortalException, SystemException {
+	public Course addCourse(String name, String description, String lecturer, int duration, int status,
+		ServiceContext serviceContext) throws PortalException, SystemException {
 
 		_validator(name, description, lecturer, duration, status);
 
@@ -69,7 +71,25 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setDuration(duration);
 		course.setStatus(status);
 
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Course.class);
+
+		indexer.reindex(course);
+
 		return courseLocalService.addCourse(course);
+	}
+
+	@Override
+	public Course deleteCourse(long courseId, ServiceContext serviceContext) throws PortalException, SystemException {
+
+		Course course = courseLocalService.getCourse(courseId);
+
+		course = courseLocalService.deleteCourse(courseId);
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Course.class);
+
+		indexer.delete(course);
+
+		return course;
 	}
 
 	@Override
@@ -79,8 +99,8 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Course updateCourse(long id, String name, String description, String lecturer, int duration, int status)
-		throws PortalException, SystemException {
+	public Course updateCourse(long id, String name, String description, String lecturer, int duration, int status,
+		ServiceContext serviceContext) throws PortalException, SystemException {
 
 		_validator(name, description, lecturer, duration, status);
 
@@ -90,7 +110,14 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 		course.setLecturer(lecturer);
 		course.setDuration(duration);
 		course.setStatus(status);
-		return coursePersistence.update(course);
+
+		coursePersistence.update(course);
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Course.class);
+
+		indexer.reindex(course);
+
+		return course;
 	}
 
 	private void _validator(String name, String description, String lecturer, int duration, int status)

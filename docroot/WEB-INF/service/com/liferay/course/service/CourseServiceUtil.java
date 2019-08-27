@@ -63,13 +63,14 @@ public class CourseServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.liferay.course.model.Course addCourse(long groupId,
+	public static com.liferay.course.model.Course addCourse(
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		return getService()
-				   .addCourse(groupId, name, description, lecturer, duration,
-			status);
+				   .addCourse(name, description, lecturer, duration, status,
+			serviceContext);
 	}
 
 	public static com.liferay.course.model.Course deleteCourse(long groupId,
@@ -96,13 +97,14 @@ public class CourseServiceUtil {
 		return getService().getCoursesCount();
 	}
 
-	public static com.liferay.course.model.Course updateCourse(long groupId,
-		long id, java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+	public static com.liferay.course.model.Course updateCourse(long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		return getService()
-				   .updateCourse(groupId, id, name, description, lecturer,
-			duration, status);
+				   .updateCourse(id, name, description, lecturer, duration,
+			status, serviceContext);
 	}
 
 	public static void clearService() {

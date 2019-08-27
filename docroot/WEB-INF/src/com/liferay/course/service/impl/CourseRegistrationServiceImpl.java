@@ -89,7 +89,6 @@ public class CourseRegistrationServiceImpl extends CourseRegistrationServiceBase
 
 			return null;
 		}
-
 	}
 
 	@Override

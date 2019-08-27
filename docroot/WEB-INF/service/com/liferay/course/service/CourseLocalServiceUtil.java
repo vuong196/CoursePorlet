@@ -273,11 +273,20 @@ public class CourseLocalServiceUtil {
 
 	public static com.liferay.course.model.Course addCourse(
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addCourse(name, description, lecturer, duration, status);
+				   .addCourse(name, description, lecturer, duration, status,
+			serviceContext);
+	}
+
+	public static com.liferay.course.model.Course deleteCourse(long courseId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().deleteCourse(courseId, serviceContext);
 	}
 
 	public static java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
@@ -287,12 +296,13 @@ public class CourseLocalServiceUtil {
 
 	public static com.liferay.course.model.Course updateCourse(long id,
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateCourse(id, name, description, lecturer, duration,
-			status);
+			status, serviceContext);
 	}
 
 	public static void clearService() {
