@@ -18,9 +18,10 @@ import java.util.List;
 
 import com.liferay.course.model.Course;
 import com.liferay.course.service.base.CourseServiceBaseImpl;
+import com.liferay.course.service.permission.CoursePermission;
+import com.liferay.course.util.MyActionKeys;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.security.auth.PrincipalException;
 
 /**
  * The implementation of the course remote service.
@@ -45,7 +46,7 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 *
+	 * 
 	 * Never reference this interface directly. Always use {@link
 	 * com.liferay.course.service.CourseServiceUtil} to access the course remote
 	 * service.
@@ -55,45 +56,71 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	public Course addCourse(long groupId, String name, String description, String lecturer, int duration, int status)
 		throws Exception {
 
-		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "ADD_COURSE")) {
+		CoursePermission.check(getPermissionChecker(), groupId, MyActionKeys.ADD_COURSE);
+
+		try {
 
 			return courseLocalService.addCourse(name, description, lecturer, duration, status);
 		}
-		else {
+		catch (Exception e) {
 
-			throw new PrincipalException();
+			return null;
 		}
+
 	}
 
 	@Override
 	public Course deleteCourse(long groupId, long id) throws Exception {
 
-		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "DELETE_COURSE")) {
+		CoursePermission.check(getPermissionChecker(), groupId, MyActionKeys.DELETE_COURSE);
+
+		try {
 
 			return courseLocalService.deleteCourse(id);
 		}
-		else {
+		catch (Exception e) {
 
-			throw new PrincipalException();
+			return null;
 		}
 	}
 
 	@Override
 	public List<Course> getAllCourses() throws Exception {
 
-		return courseLocalService.getCourses(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		try {
+
+			return courseLocalService.getCourses(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
 	}
 
 	@Override
 	public Course getCourseById(long id) throws Exception {
 
-		return courseLocalService.getCourse(id);
+		try {
+
+			return courseLocalService.getCourse(id);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
 	}
 
 	@Override
 	public List<Course> getCoursesByStatus(int status) throws SystemException {
 
-		return courseLocalService.getCoursesByStatus(status);
+		try {
+
+			return courseLocalService.getCoursesByStatus(status);
+		}
+		catch (Exception e) {
+
+			return null;
+		}
 	}
 
 	@Override
@@ -106,13 +133,16 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	public Course updateCourse(long groupId, long id, String name, String description, String lecturer, int duration,
 		int status) throws Exception {
 
-		if (getPermissionChecker().hasPermission(groupId, "com.liferay.course.model.Course", groupId, "UPDATE_COURSE")) {
+		CoursePermission.check(getPermissionChecker(), groupId, MyActionKeys.UPDATE_COURSE);
+
+		try {
 
 			return courseLocalService.updateCourse(id, name, description, lecturer, duration, status);
 		}
-		else {
+		catch (Exception e) {
 
 			return null;
 		}
+
 	}
 }
