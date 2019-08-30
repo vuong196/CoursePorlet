@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.liferay.course">
+	<author>ces</author>
+	<namespace>course</namespace>
+
+	<entity name="Course" local-service="true" remote-service="true" table="Course" uuid="true">
+		<!-- PK fields -->
+		<column name="courseId" type="long" primary="true" db-name="CourseId"/>
+
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+		<column name="name" type="String" db-name="Name"/>
+		<column name="description" type="String" db-name="Description"/>
+		<column name="lecturer" type="String" db-name="Lecturer"/>
+		<column name="duration" type="int" db-name="Duration"/>
+		<column name="status" type="int" db-name="Status"/>
+		<!-- Order -->
+		<order by="desc">
+			<order-column name="courseId" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="courseId" return-type="Collection">
+			<finder-column name="courseId" />
+		</finder>
+		<finder name="status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
+		<!-- References -->
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+	<entity name="CourseRegistration" local-service="true" remote-service="true" table="CourseRegistration" uuid="true">
+		<!-- PK fields -->
+		<column name="id" type="long" primary="true" db-name="id"/>
+
+		<!--  Foreign key -->
+		<column name="courseId" type="long" db-name="courseId"/>
+		<column name="userId" type="long" db-name="userId"/>
+
+		<!-- Other fields -->
+		<column name="status" type="int" db-name="status"/>
+
+		<finder name="Course_User" return-type="Course_User">
+			<finder-column name="courseId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="User_Status" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
+		<finder name="UserId" return-type="Collection" where="status!=-1">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="CourseId" return-type="Collection">
+			<finder-column name="courseId"/>
+		</finder>
+		<finder name="Course_Status" return-type="Collection">
+			<finder-column name="courseId" />
+			<finder-column name="status" />
+		</finder>
+	</entity>
+	<exceptions>
+		<exception>CourseName</exception>
+		<exception>CourseDescription</exception>
+		<exception>CourseLecturer</exception>
+		<exception>CourseDuration</exception>
+		<exception>CourseStatus</exception>
+	</exceptions>
+</service-builder>

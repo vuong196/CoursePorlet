@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.liferay.course.model.Course" />
+	<import class="com.liferay.course.model.CourseRegistration" />
+	<class name="com.liferay.course.model.impl.CourseImpl" table="Course">
+		<cache usage="read-write" />
+		<id name="courseId" column="CourseId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" column="Name" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" column="Description" />
+		<property name="lecturer" type="com.liferay.portal.dao.orm.hibernate.StringType" column="Lecturer" />
+		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="Duration" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="Status" />
+	</class>
+	<class name="com.liferay.course.model.impl.CourseRegistrationImpl" table="CourseRegistration">
+		<cache usage="read-write" />
+		<id name="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+</hibernate-mapping>
