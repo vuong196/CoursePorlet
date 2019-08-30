@@ -22,6 +22,7 @@ import com.liferay.course.service.permission.CoursePermission;
 import com.liferay.course.util.MyActionKeys;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
 
 /**
  * The implementation of the course remote service.
@@ -46,21 +47,21 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 * 
+	 *
 	 * Never reference this interface directly. Always use {@link
 	 * com.liferay.course.service.CourseServiceUtil} to access the course remote
 	 * service.
 	 */
 
 	@Override
-	public Course addCourse(long groupId, String name, String description, String lecturer, int duration, int status)
-		throws Exception {
+	public Course addCourse(String name, String description, String lecturer, int duration, int status,
+		ServiceContext serviceContext) throws Exception {
 
-		CoursePermission.check(getPermissionChecker(), groupId, MyActionKeys.ADD_COURSE);
+		CoursePermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), MyActionKeys.ADD_COURSE);
 
 		try {
 
-			return courseLocalService.addCourse(name, description, lecturer, duration, status);
+			return courseLocalService.addCourse(name, description, lecturer, duration, status, serviceContext);
 		}
 		catch (Exception e) {
 
@@ -130,14 +131,14 @@ public class CourseServiceImpl extends CourseServiceBaseImpl {
 	}
 
 	@Override
-	public Course updateCourse(long groupId, long id, String name, String description, String lecturer, int duration,
-		int status) throws Exception {
+	public Course updateCourse(long id, String name, String description, String lecturer, int duration, int status,
+		ServiceContext serviceContext) throws Exception {
 
-		CoursePermission.check(getPermissionChecker(), groupId, MyActionKeys.UPDATE_COURSE);
+		CoursePermission.check(getPermissionChecker(), serviceContext.getScopeGroupId(), MyActionKeys.UPDATE_COURSE);
 
 		try {
 
-			return courseLocalService.updateCourse(id, name, description, lecturer, duration, status);
+			return courseLocalService.updateCourse(id, name, description, lecturer, duration, status, serviceContext);
 		}
 		catch (Exception e) {
 

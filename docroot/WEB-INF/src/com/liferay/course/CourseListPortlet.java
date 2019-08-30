@@ -11,6 +11,7 @@ import com.liferay.course.service.CourseServiceUtil;
 import com.liferay.course.util.CourseStatus;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -18,7 +19,14 @@ public class CourseListPortlet extends MVCPortlet {
 
 	public void addCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
+		ServiceContext serviceContext = new ServiceContext();
 		long groupId = PortalUtil.getScopeGroupId(actionRequest);
+		long companyId = PortalUtil.getCompanyId(actionRequest);
+		long userId = PortalUtil.getUserId(actionRequest);
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setCompanyId(companyId);
+		serviceContext.setUserId(userId);
+
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		String lecturer = ParamUtil.getString(actionRequest, "lecturer");
@@ -26,7 +34,7 @@ public class CourseListPortlet extends MVCPortlet {
 		int status = ParamUtil.getBoolean(actionRequest, "status") ? CourseStatus.AVAILABLE.getStatusNumber()
 			: CourseStatus.UNAVAILABLE.getStatusNumber();
 
-		if (CourseServiceUtil.addCourse(groupId, name, description, lecturer, duration, status) == null) {
+		if (CourseServiceUtil.addCourse(name, description, lecturer, duration, status, serviceContext) == null) {
 
 			SessionErrors.add(actionRequest, "error");
 		}
@@ -92,7 +100,14 @@ public class CourseListPortlet extends MVCPortlet {
 
 	public void updateCourse(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
+		ServiceContext serviceContext = new ServiceContext();
 		long groupId = PortalUtil.getScopeGroupId(actionRequest);
+		long companyId = PortalUtil.getCompanyId(actionRequest);
+		long userId = PortalUtil.getUserId(actionRequest);
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setCompanyId(companyId);
+		serviceContext.setUserId(userId);
+
 		long id = ParamUtil.getLong(actionRequest, "id");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
@@ -101,7 +116,7 @@ public class CourseListPortlet extends MVCPortlet {
 		int status = ParamUtil.getBoolean(actionRequest, "status") ? CourseStatus.AVAILABLE.getStatusNumber()
 			: CourseStatus.UNAVAILABLE.getStatusNumber();
 
-		if (CourseServiceUtil.updateCourse(groupId, id, name, description, lecturer, duration, status) == null) {
+		if (CourseServiceUtil.updateCourse(id, name, description, lecturer, duration, status, serviceContext) == null) {
 
 			SessionErrors.add(actionRequest, "error");
 		}
