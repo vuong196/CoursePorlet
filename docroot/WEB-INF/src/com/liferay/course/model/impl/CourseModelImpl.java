@@ -65,13 +65,15 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "CourseId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "Name", Types.VARCHAR },
 			{ "Description", Types.VARCHAR },
 			{ "Lecturer", Types.VARCHAR },
 			{ "Duration", Types.INTEGER },
 			{ "Status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Course (uuid_ VARCHAR(75) null,CourseId LONG not null primary key,Name VARCHAR(75) null,Description VARCHAR(75) null,Lecturer VARCHAR(75) null,Duration INTEGER,Status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table Course (uuid_ VARCHAR(75) null,CourseId LONG not null primary key,groupId LONG,companyId LONG,Name VARCHAR(75) null,Description VARCHAR(75) null,Lecturer VARCHAR(75) null,Duration INTEGER,Status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table Course";
 	public static final String ORDER_BY_JPQL = " ORDER BY course.courseId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY Course.CourseId DESC";
@@ -87,9 +89,11 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.course.model.Course"),
 			true);
-	public static long COURSEID_COLUMN_BITMASK = 1L;
-	public static long STATUS_COLUMN_BITMASK = 2L;
-	public static long UUID_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long COURSEID_COLUMN_BITMASK = 2L;
+	public static long GROUPID_COLUMN_BITMASK = 4L;
+	public static long STATUS_COLUMN_BITMASK = 8L;
+	public static long UUID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -106,6 +110,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		model.setUuid(soapModel.getUuid());
 		model.setCourseId(soapModel.getCourseId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setLecturer(soapModel.getLecturer());
@@ -177,6 +183,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("courseId", getCourseId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("lecturer", getLecturer());
@@ -198,6 +206,18 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		if (courseId != null) {
 			setCourseId(courseId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -276,6 +296,52 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	public long getOriginalCourseId() {
 		return _originalCourseId;
+	}
+
+	@JSON
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
+		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
+	}
+
+	@JSON
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
+		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -366,7 +432,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Course.class.getName(), getPrimaryKey());
 	}
 
@@ -393,6 +459,8 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		courseImpl.setUuid(getUuid());
 		courseImpl.setCourseId(getCourseId());
+		courseImpl.setGroupId(getGroupId());
+		courseImpl.setCompanyId(getCompanyId());
 		courseImpl.setName(getName());
 		courseImpl.setDescription(getDescription());
 		courseImpl.setLecturer(getLecturer());
@@ -464,6 +532,14 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 		courseModelImpl._setOriginalCourseId = false;
 
+		courseModelImpl._originalGroupId = courseModelImpl._groupId;
+
+		courseModelImpl._setOriginalGroupId = false;
+
+		courseModelImpl._originalCompanyId = courseModelImpl._companyId;
+
+		courseModelImpl._setOriginalCompanyId = false;
+
 		courseModelImpl._originalStatus = courseModelImpl._status;
 
 		courseModelImpl._setOriginalStatus = false;
@@ -484,6 +560,10 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		}
 
 		courseCacheModel.courseId = getCourseId();
+
+		courseCacheModel.groupId = getGroupId();
+
+		courseCacheModel.companyId = getCompanyId();
 
 		courseCacheModel.name = getName();
 
@@ -518,12 +598,16 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", courseId=");
 		sb.append(getCourseId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -541,7 +625,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.course.model.Course");
@@ -554,6 +638,14 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 		sb.append(
 			"<column><column-name>courseId</column-name><column-value><![CDATA[");
 		sb.append(getCourseId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -588,6 +680,12 @@ public class CourseModelImpl extends BaseModelImpl<Course>
 	private long _courseId;
 	private long _originalCourseId;
 	private boolean _setOriginalCourseId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
+	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private String _name;
 	private String _description;
 	private String _lecturer;

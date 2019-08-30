@@ -50,6 +50,8 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 
 		attributes.put("uuid", getUuid());
 		attributes.put("courseId", getCourseId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("lecturer", getLecturer());
@@ -71,6 +73,18 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 
 		if (courseId != null) {
 			setCourseId(courseId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -162,6 +176,46 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
 	@Override
 	public void setCourseId(long courseId) {
 		_course.setCourseId(courseId);
+	}
+
+	/**
+	* Returns the group ID of this course.
+	*
+	* @return the group ID of this course
+	*/
+	@Override
+	public long getGroupId() {
+		return _course.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this course.
+	*
+	* @param groupId the group ID of this course
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_course.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this course.
+	*
+	* @return the company ID of this course
+	*/
+	@Override
+	public long getCompanyId() {
+		return _course.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this course.
+	*
+	* @param companyId the company ID of this course
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_course.setCompanyId(companyId);
 	}
 
 	/**

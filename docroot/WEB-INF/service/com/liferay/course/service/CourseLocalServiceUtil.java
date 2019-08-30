@@ -185,6 +185,34 @@ public class CourseLocalServiceUtil {
 	}
 
 	/**
+	* Returns the course with the matching UUID and company.
+	*
+	* @param uuid the course's UUID
+	* @param companyId the primary key of the company
+	* @return the matching course, or <code>null</code> if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.course.model.Course fetchCourseByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchCourseByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	* Returns the course matching the UUID and group.
+	*
+	* @param uuid the course's UUID
+	* @param groupId the primary key of the group
+	* @return the matching course, or <code>null</code> if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.course.model.Course fetchCourseByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchCourseByUuidAndGroupId(uuid, groupId);
+	}
+
+	/**
 	* Returns the course with the primary key.
 	*
 	* @param courseId the primary key of the course
@@ -203,6 +231,38 @@ public class CourseLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the course with the matching UUID and company.
+	*
+	* @param uuid the course's UUID
+	* @param companyId the primary key of the company
+	* @return the matching course
+	* @throws PortalException if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.course.model.Course getCourseByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCourseByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	* Returns the course matching the UUID and group.
+	*
+	* @param uuid the course's UUID
+	* @param groupId the primary key of the group
+	* @return the matching course
+	* @throws PortalException if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.course.model.Course getCourseByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCourseByUuidAndGroupId(uuid, groupId);
 	}
 
 	/**
@@ -273,11 +333,20 @@ public class CourseLocalServiceUtil {
 
 	public static com.liferay.course.model.Course addCourse(
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addCourse(name, description, lecturer, duration, status);
+				   .addCourse(name, description, lecturer, duration, status,
+			serviceContext);
+	}
+
+	public static com.liferay.course.model.Course deleteCourse(long courseId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().deleteCourse(courseId, serviceContext);
 	}
 
 	public static java.util.List<com.liferay.course.model.Course> getCoursesByStatus(
@@ -287,12 +356,13 @@ public class CourseLocalServiceUtil {
 
 	public static com.liferay.course.model.Course updateCourse(long id,
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateCourse(id, name, description, lecturer, duration,
-			status);
+			status, serviceContext);
 	}
 
 	public static void clearService() {

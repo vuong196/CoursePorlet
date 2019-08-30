@@ -35,8 +35,8 @@ public class CourseServiceClpInvoker {
 		_methodName42 = "addCourse";
 
 		_methodParameterTypes42 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"int", "int", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName43 = "deleteCourse";
@@ -62,8 +62,9 @@ public class CourseServiceClpInvoker {
 		_methodName48 = "updateCourse";
 
 		_methodParameterTypes48 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -83,11 +84,11 @@ public class CourseServiceClpInvoker {
 
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return CourseServiceUtil.addCourse(((Long)arguments[0]).longValue(),
+			return CourseServiceUtil.addCourse((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
+				((Integer)arguments[3]).intValue(),
 				((Integer)arguments[4]).intValue(),
-				((Integer)arguments[5]).intValue());
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName43.equals(name) &&
@@ -119,11 +120,11 @@ public class CourseServiceClpInvoker {
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
 			return CourseServiceUtil.updateCourse(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
-				(java.lang.String)arguments[4],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue(),
 				((Integer)arguments[5]).intValue(),
-				((Integer)arguments[6]).intValue());
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();

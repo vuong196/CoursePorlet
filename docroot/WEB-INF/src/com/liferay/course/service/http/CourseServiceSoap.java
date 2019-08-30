@@ -62,13 +62,14 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class CourseServiceSoap {
-	public static com.liferay.course.model.CourseSoap addCourse(long groupId,
+	public static com.liferay.course.model.CourseSoap addCourse(
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.course.model.Course returnValue = CourseServiceUtil.addCourse(groupId,
-					name, description, lecturer, duration, status);
+			com.liferay.course.model.Course returnValue = CourseServiceUtil.addCourse(name,
+					description, lecturer, duration, status, serviceContext);
 
 			return com.liferay.course.model.CourseSoap.toSoapModel(returnValue);
 		}
@@ -149,13 +150,15 @@ public class CourseServiceSoap {
 		}
 	}
 
-	public static com.liferay.course.model.CourseSoap updateCourse(
-		long groupId, long id, java.lang.String name,
-		java.lang.String description, java.lang.String lecturer, int duration,
-		int status) throws RemoteException {
+	public static com.liferay.course.model.CourseSoap updateCourse(long id,
+		java.lang.String name, java.lang.String description,
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.course.model.Course returnValue = CourseServiceUtil.updateCourse(groupId,
-					id, name, description, lecturer, duration, status);
+			com.liferay.course.model.Course returnValue = CourseServiceUtil.updateCourse(id,
+					name, description, lecturer, duration, status,
+					serviceContext);
 
 			return com.liferay.course.model.CourseSoap.toSoapModel(returnValue);
 		}

@@ -169,6 +169,32 @@ public interface CourseLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the course with the matching UUID and company.
+	*
+	* @param uuid the course's UUID
+	* @param companyId the primary key of the company
+	* @return the matching course, or <code>null</code> if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.course.model.Course fetchCourseByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the course matching the UUID and group.
+	*
+	* @param uuid the course's UUID
+	* @param groupId the primary key of the group
+	* @return the matching course, or <code>null</code> if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.course.model.Course fetchCourseByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the course with the primary key.
 	*
 	* @param courseId the primary key of the course
@@ -185,6 +211,36 @@ public interface CourseLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the course with the matching UUID and company.
+	*
+	* @param uuid the course's UUID
+	* @param companyId the primary key of the company
+	* @return the matching course
+	* @throws PortalException if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.course.model.Course getCourseByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the course matching the UUID and group.
+	*
+	* @param uuid the course's UUID
+	* @param groupId the primary key of the group
+	* @return the matching course
+	* @throws PortalException if a matching course could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.course.model.Course getCourseByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -247,7 +303,12 @@ public interface CourseLocalService extends BaseLocalService,
 
 	public com.liferay.course.model.Course addCourse(java.lang.String name,
 		java.lang.String description, java.lang.String lecturer, int duration,
-		int status)
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.course.model.Course deleteCourse(long courseId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -257,7 +318,8 @@ public interface CourseLocalService extends BaseLocalService,
 
 	public com.liferay.course.model.Course updateCourse(long id,
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

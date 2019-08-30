@@ -216,6 +216,34 @@ public abstract class CourseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the course with the matching UUID and company.
+	 *
+	 * @param uuid the course's UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching course, or <code>null</code> if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course fetchCourseByUuidAndCompanyId(String uuid, long companyId)
+		throws SystemException {
+		return coursePersistence.fetchByUuid_C_First(uuid, companyId, null);
+	}
+
+	/**
+	 * Returns the course matching the UUID and group.
+	 *
+	 * @param uuid the course's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching course, or <code>null</code> if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course fetchCourseByUuidAndGroupId(String uuid, long groupId)
+		throws SystemException {
+		return coursePersistence.fetchByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Returns the course with the primary key.
 	 *
 	 * @param courseId the primary key of the course
@@ -233,6 +261,36 @@ public abstract class CourseLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException, SystemException {
 		return coursePersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns the course with the matching UUID and company.
+	 *
+	 * @param uuid the course's UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching course
+	 * @throws PortalException if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course getCourseByUuidAndCompanyId(String uuid, long companyId)
+		throws PortalException, SystemException {
+		return coursePersistence.findByUuid_C_First(uuid, companyId, null);
+	}
+
+	/**
+	 * Returns the course matching the UUID and group.
+	 *
+	 * @param uuid the course's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching course
+	 * @throws PortalException if a matching course could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Course getCourseByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return coursePersistence.findByUUID_G(uuid, groupId);
 	}
 
 	/**

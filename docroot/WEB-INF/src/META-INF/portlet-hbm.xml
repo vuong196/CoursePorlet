@@ -10,6 +10,8 @@
 			<generator class="assigned" />
 		</id>
 		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" column="Name" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" column="Description" />
 		<property name="lecturer" type="com.liferay.portal.dao.orm.hibernate.StringType" column="Lecturer" />

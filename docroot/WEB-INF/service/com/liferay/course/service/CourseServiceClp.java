@@ -35,8 +35,8 @@ public class CourseServiceClp implements CourseService {
 		_methodName3 = "addCourse";
 
 		_methodParameterTypes3 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"int", "int", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName4 = "deleteCourse";
@@ -62,8 +62,9 @@ public class CourseServiceClp implements CourseService {
 		_methodName9 = "updateCourse";
 
 		_methodParameterTypes9 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -118,9 +119,9 @@ public class CourseServiceClp implements CourseService {
 	}
 
 	@Override
-	public com.liferay.course.model.Course addCourse(long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+	public com.liferay.course.model.Course addCourse(java.lang.String name,
+		java.lang.String description, java.lang.String lecturer, int duration,
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		Object returnObj = null;
 
@@ -128,9 +129,7 @@ public class CourseServiceClp implements CourseService {
 			returnObj = _invokableService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
 					new Object[] {
-						groupId,
-						
-					ClpSerializer.translateInput(name),
+						ClpSerializer.translateInput(name),
 						
 					ClpSerializer.translateInput(description),
 						
@@ -138,7 +137,9 @@ public class CourseServiceClp implements CourseService {
 						
 					duration,
 						
-					status
+					status,
+						
+					ClpSerializer.translateInput(serviceContext)
 					});
 		}
 		catch (Throwable t) {
@@ -300,9 +301,10 @@ public class CourseServiceClp implements CourseService {
 	}
 
 	@Override
-	public com.liferay.course.model.Course updateCourse(long groupId, long id,
+	public com.liferay.course.model.Course updateCourse(long id,
 		java.lang.String name, java.lang.String description,
-		java.lang.String lecturer, int duration, int status)
+		java.lang.String lecturer, int duration, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		Object returnObj = null;
 
@@ -310,9 +312,7 @@ public class CourseServiceClp implements CourseService {
 			returnObj = _invokableService.invokeMethod(_methodName9,
 					_methodParameterTypes9,
 					new Object[] {
-						groupId,
-						
-					id,
+						id,
 						
 					ClpSerializer.translateInput(name),
 						
@@ -322,7 +322,9 @@ public class CourseServiceClp implements CourseService {
 						
 					duration,
 						
-					status
+					status,
+						
+					ClpSerializer.translateInput(serviceContext)
 					});
 		}
 		catch (Throwable t) {

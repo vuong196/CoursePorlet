@@ -87,6 +87,34 @@ public interface CourseModel extends BaseModel<Course> {
 	public void setCourseId(long courseId);
 
 	/**
+	 * Returns the group ID of this course.
+	 *
+	 * @return the group ID of this course
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this course.
+	 *
+	 * @param groupId the group ID of this course
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this course.
+	 *
+	 * @return the company ID of this course
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this course.
+	 *
+	 * @param companyId the company ID of this course
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the name of this course.
 	 *
 	 * @return the name of this course

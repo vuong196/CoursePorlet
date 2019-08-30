@@ -74,6 +74,8 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 		attributes.put("uuid", getUuid());
 		attributes.put("courseId", getCourseId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("lecturer", getLecturer());
@@ -95,6 +97,18 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 		if (courseId != null) {
 			setCourseId(courseId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -167,6 +181,52 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 				Method method = clazz.getMethod("setCourseId", long.class);
 
 				method.invoke(_courseRemoteModel, courseId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_courseRemoteModel != null) {
+			try {
+				Class<?> clazz = _courseRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_courseRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_courseRemoteModel != null) {
+			try {
+				Class<?> clazz = _courseRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_courseRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -360,6 +420,8 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 		clone.setUuid(getUuid());
 		clone.setCourseId(getCourseId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setLecturer(getLecturer());
@@ -421,12 +483,16 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", courseId=");
 		sb.append(getCourseId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -444,7 +510,7 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.course.model.Course");
@@ -457,6 +523,14 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 		sb.append(
 			"<column><column-name>courseId</column-name><column-value><![CDATA[");
 		sb.append(getCourseId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -486,6 +560,8 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
 
 	private String _uuid;
 	private long _courseId;
+	private long _groupId;
+	private long _companyId;
 	private String _name;
 	private String _description;
 	private String _lecturer;
