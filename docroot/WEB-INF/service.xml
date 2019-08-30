@@ -8,6 +8,9 @@
 		<!-- PK fields -->
 		<column name="courseId" type="long" primary="true" db-name="CourseId"/>
 
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+
 		<!-- Other fields -->
 		<column name="name" type="String" db-name="Name"/>
 		<column name="description" type="String" db-name="Description"/>
